@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "987536608427",
+    "project_id": "androidbookshelf-c27f5",
+    "storage_bucket": "androidbookshelf-c27f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987536608427:android:aac633d539c57eaddc7bee",
+        "android_client_info": {
+          "package_name": "com.choisong.bookshelf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4HYax2yF9t7ckTsZtixlsl4NryluDux8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

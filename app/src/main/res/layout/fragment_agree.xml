@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.signup.AgreeFragment">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBackground"
+                android:layout_width="match_parent"
+                android:layout_height="1150dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/login_bg5"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:id="@+id/txtSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGNUP"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                android:textStyle="bold"
+                android:layout_marginTop="132dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/txtId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintTop_toBottomOf="@id/txtSignUp"
+                app:layout_constraintBottom_toTopOf="@id/etId"
+                app:layout_constraintStart_toStartOf="@id/etId"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etId"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:hint="5~15자의 영문, 숫자 혼합"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:theme="@style/EditTextStyleLogin"
+                android:textColorHint="@color/white"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/bg_no_white_8"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@id/txtId"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/txtIdWarning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="❗이미 사용 중인 아이디 입니다."
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/etId"
+                app:layout_constraintStart_toStartOf="@id/etId"
+                app:layout_constraintEnd_toEndOf="@id/etId"/>
+
+            <TextView
+                android:id="@+id/txtPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/txtIdWarning"
+                app:layout_constraintBottom_toTopOf="@id/etPassword"
+                app:layout_constraintStart_toStartOf="@id/etPassword"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:hint="8~15자의 영문, 숫자, 특수문자 혼합"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:theme="@style/EditTextStyleLogin"
+                android:textColorHint="@color/white"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/bg_no_white_8"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@id/txtPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/txtPasswordWarning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="❗️비밀번호는 영문, 숫자, 특문자를 포함하여 8~15자이어야 합니다."
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                app:layout_constraintStart_toStartOf="@id/etPassword"
+                app:layout_constraintEnd_toEndOf="@id/etPassword"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPasswordCheck"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:hint="비밀번호 확인"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:theme="@style/EditTextStyleLogin"
+                android:textColorHint="@color/white"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/bg_no_white_8"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/txtPasswordWarning"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/txtPasswordCheckWarning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="❗️비밀번호가 일치하지 않습니다."
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/etPasswordCheck"
+                app:layout_constraintStart_toStartOf="@id/etPasswordCheck"
+                app:layout_constraintEnd_toEndOf="@id/etPasswordCheck"/>
+
+            <TextView
+                android:id="@+id/txtNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="닉네임"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/txtPasswordCheckWarning"
+                app:layout_constraintStart_toStartOf="@id/etPassword"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etNickname"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:hint="최대 20자"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:theme="@style/EditTextStyleLogin"
+                android:textColorHint="@color/white"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/bg_no_white_8"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/txtNickname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/txtNicknameWarning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="❗️이미 사용 중인 닉네임 입니다."
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/etNickname"
+                app:layout_constraintStart_toStartOf="@id/etNickname"
+                app:layout_constraintEnd_toEndOf="@id/etNickname"/>
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이메일"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/txtNicknameWarning"
+                app:layout_constraintStart_toStartOf="@id/etEmail"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:hint="이메일 형식에 맞게 입력해주세요."
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:theme="@style/EditTextStyleLogin"
+                android:textColorHint="@color/white"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/bg_no_white_8"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/txtEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/txtEmailWarning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="❗️이미 사용 중인 이메일 입니다."
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/etEmail"
+                app:layout_constraintStart_toStartOf="@id/etEmail"
+                app:layout_constraintEnd_toEndOf="@id/etEmail"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clAgreeAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bg_no_white_40"
+                android:layout_marginHorizontal="16dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtEmailWarning">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbAll"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:button="@drawable/bg_round_checkbox_selector"
+                    android:padding="8dp"
+                    android:text="전체동의"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clTOU"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/clAgreeAll"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbTOU"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:button="@drawable/bg_checkbox_selector"
+                    android:padding="8dp"
+                    android:text="이용약관"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivTOU"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ivTOU"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/cbTOU"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/icon_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clPIU"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/clTOU">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbPIU"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:button="@drawable/bg_checkbox_selector"
+                    android:padding="8dp"
+                    android:text="개인정보처리방침"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivPIU"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ivPIU"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/cbPIU"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/icon_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSPU"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/clPIU">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbSPU"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:button="@drawable/bg_checkbox_selector"
+                    android:padding="8dp"
+                    android:text="위치기반서비스이용약관"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivSPU"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ivSPU"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/cbSPU"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/icon_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSPU2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/clSPU">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbSPU2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:button="@drawable/bg_checkbox_selector"
+                    android:padding="8dp"
+                    android:text="오프라인 서비스 이용약관"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivSPU2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ivSPU2"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/cbSPU2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/icon_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSignUp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:enabled="false"
+                android:background="@drawable/bg_no_white_8"
+                android:text="회원가입"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/clSPU2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

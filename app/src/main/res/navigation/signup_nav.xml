@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_nav"
+    app:startDestination="@id/agreeFragment">
+
+    <fragment
+        android:id="@+id/agreeFragment"
+        android:name="com.choisong.bookshelf.view.fragment.signup.AgreeFragment"
+        android:label="fragment_agree"
+        tools:layout="@layout/fragment_agree" >
+        <action
+            android:id="@+id/action_agreeFragment_to_signUpSuccessFragment"
+            app:destination="@id/signUpSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSuccessFragment"
+        android:name="com.choisong.bookshelf.view.fragment.signup.SignUpSuccessFragment"
+        android:label="fragment_sign_up_success"
+        tools:layout="@layout/fragment_sign_up_success" />
+</navigation>

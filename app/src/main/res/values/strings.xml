@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">책꽂이</string>
+    <string name="KAKAO_NATIVE_KEY">017ea180b028814774718b6e2c81fc63</string>
+    <string name="KAKAO_KEY">kakao017ea180b028814774718b6e2c81fc63</string>
+    <string name="NAVER_CLIENT_ID">1WlzNZ_OmFOk9sdThG9o</string>
+    <string name="NAVER_CLIENT_SECRET">0IxDBKSzK7</string>
+    <string name="GOOGLE_MAP">AIzaSyDftfEb39F5PsaH4DUIrgbPiV7xiYBRiOg</string>
+    <string name="GOOGLE_CLIENT_ID">856775775831-appl0a6o7pg5arn6plim8tqeneqmf2ci.apps.googleusercontent.com</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" >
+        <action
+            android:id="@+id/action_bookFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_chatroomFragment"
+            app:destination="@id/chatroomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_chargeFragment"
+            app:destination="@id/chargeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_chargeLogFragment"
+            app:destination="@id/chargeLogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="bestseller"
+            app:argType="com.choisong.bookshelf.model.BestsellerResultData"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="popularBook"
+            app:argType="com.choisong.bookshelf.model.PopularResult"
+            app:nullable="true" />
+        <argument
+            android:name="generalBook"
+            app:argType="com.choisong.bookshelf.model.GeneralResult"
+            app:nullable="true" />
+        <argument
+            android:name="detailType"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+        <argument
+            android:name="bookDetailData"
+            app:argType="com.choisong.bookshelf.model.BookDetailDataResult"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_chatroomFragment"
+            app:destination="@id/chatroomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chargeFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.ChargeFragment"
+        android:label="fragment_charge"
+        tools:layout="@layout/fragment_charge" >
+        <action
+            android:id="@+id/action_chargeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chargeLogFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.ChargeLogFragment"
+        android:label="fragment_charge_log"
+        tools:layout="@layout/fragment_charge_log" >
+        <action
+            android:id="@+id/action_chargeLogFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatroomFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.ChatroomFragment"
+        android:label="fragment_chatroom"
+        tools:layout="@layout/fragment_chatroom" >
+        <action
+            android:id="@+id/action_chatroomFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_chatroomFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <argument
+            android:name="chatroomIdx"
+            app:argType="integer" />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.choisong.bookshelf.view.fragment.home.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

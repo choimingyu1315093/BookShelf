@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/bottom_nav_home"
+        android:title="홈" />
+    <item
+        android:id="@+id/bookFragment"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="책"/>
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/icon_map"
+        android:title="지도"/>
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/bottom_nav_chat"
+        android:title="채팅"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/bottom_nav_profile"
+        android:title="MY"/>
+</menu>

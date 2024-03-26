@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".view.activity.MainActivity">
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:paddingBottom="90dp">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvNick"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="32dp"-->
+<!--                    android:layout_marginTop="32dp"-->
+<!--                    android:text="Hi Rechard"-->
+<!--                    android:textColor="#DD3D00"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textview5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Order &amp; Eat"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="20sp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/tvNick"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvNick" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/editTextTextPersonName"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginHorizontal="32dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@drawable/search_background"-->
+<!--                    android:drawableStart="@drawable/ic_baseline_search_24"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="Find Your Food"-->
+<!--                    android:inputType="textPersonName"-->
+<!--                    android:paddingStart="20dp"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="italic"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/textview5" />-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constraintLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:layout_marginStart="32dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="32dp"-->
+<!--                    android:background="@drawable/orange_light_banner"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView5"-->
+<!--                        android:layout_width="106dp"-->
+<!--                        android:layout_height="103dp"-->
+<!--                        android:layout_marginStart="52dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintVertical_bias="0.51"-->
+<!--                        app:srcCompat="@drawable/icon_book" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView5"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="28dp"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:text="Free Delivery"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textSize="20sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imageView5"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/imageView5" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView6"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="May 5 - June 10"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textStyle="normal"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/textView5"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/textView5"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView5" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/orange_button"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/textView6"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/textView6"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView6">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/textView9"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="16dp"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:layout_marginBottom="8dp"-->
+<!--                            android:text="Order Now"-->
+<!--                            android:textColor="#ffffff"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView7"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="32dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Categories"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recyclerView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clipToPadding="false"-->
+<!--                    android:paddingLeft="22dp"-->
+<!--                    android:paddingRight="22dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView8"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="32dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Popular"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/recyclerView" />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clipToPadding="false"-->
+<!--                    android:paddingStart="22dp"-->
+<!--                    android:paddingEnd="22dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
+<!--    -->
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--            android:id="@+id/app_bar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="#F6F6F6"-->
+<!--            app:fabCradleMargin="8dp"-->
+<!--            app:fabCradleRoundedCornerRadius="50dp"-->
+<!--            app:fabCradleVerticalOffset="6dp"-->
+<!--            android:layout_gravity="bottom">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginEnd="16dp">-->
+<!--                -->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/homeBtn"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_weight=".2">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        app:srcCompat="@drawable/ic_baseline_home_24"/>-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Home"-->
+<!--                        android:textColor="#676767"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textAlignment="center"/>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/profileBtn"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginEnd="80dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_weight=".2">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        app:srcCompat="@drawable/ic_baseline_home_24"/>-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Home"-->
+<!--                        android:textColor="#676767"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textAlignment="center"/>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/SupportBtn"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_weight=".2">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView3"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        app:srcCompat="@drawable/ic_baseline_home_24"/>-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView3"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Home"-->
+<!--                        android:textColor="#676767"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textAlignment="center"/>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/SettingBtn"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_weight=".2">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView4"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        app:srcCompat="@drawable/ic_baseline_home_24"/>-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView4"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Home"-->
+<!--                        android:textColor="#676767"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textAlignment="center"/>-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+<!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="#FF5E00"-->
+<!--            android:elevation="3dp"-->
+<!--            android:src="@drawable/ic_baseline_shopping_cart_24"-->
+<!--            app:backgroundTint="#FF5E00"-->
+<!--            app:layout_anchor="@id/app_bar"-->
+<!--            app:maxImageSize="30dp"-->
+<!--            app:tint="#ffffff"/>-->
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>
