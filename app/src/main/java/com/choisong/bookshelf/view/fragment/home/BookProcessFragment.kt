@@ -23,21 +23,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class BookProcessFragment(private val isWish: Boolean) : Fragment(), WishHaveBookAdapter.OnClickListener, HaveWishBookAdapter.OnClickListener {
     private var _binding: FragmentBookProcessBinding? = null
     private val binding get() = _binding!!
-    private val bookProcessViewModel: BookProcessViewModel by viewModels()
-
+    private val bookProcessViewModel: BookProcessViewModel by activityViewModels()
+    
     companion object {
         const val TAG = "BookProcessFragment"
     }
+    private lateinit var accessToken: String
 
     lateinit var wishHaveBookAdapter: WishHaveBookAdapter
     lateinit var haveWishBookAdapter: HaveWishBookAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        accessToken = com.choisong.bookshelf.MyApplication.prefs.getAccessToken("accessToken", "")
+        bookProcessViewModel.haveBook(accessToken)
+        bookProcessViewModel.wishBook(accessToken)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,18 +57,13 @@ class BookProcessFragment(private val isWish: Boolean) : Fragment(), WishHaveBoo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        init()
         observeViewModel()
-    }
-
-    private fun init() = with(binding){
-
     }
 
     private fun observeViewModel() = with(binding){
         if(isWish){
             bookProcessViewModel.wishBookResult.observe(viewLifecycleOwner){
-                if(it != null && it.size != 0){
+                if(it!!.size != 0){
                     wishHaveBookAdapter = WishHaveBookAdapter(it, this@BookProcessFragment)
                     rvBook.apply {
                         layoutManager = GridLayoutManager(requireContext(), 3)
@@ -76,7 +80,7 @@ class BookProcessFragment(private val isWish: Boolean) : Fragment(), WishHaveBoo
             }
         }else {
             bookProcessViewModel.haveBookResult.observe(viewLifecycleOwner){
-                if(it != null && it.size != 0){
+                if(it!!.size != 0){
                     haveWishBookAdapter = HaveWishBookAdapter(it, this@BookProcessFragment)
                     rvBook.apply {
                         layoutManager = GridLayoutManager(requireContext(), 3)
@@ -96,6 +100,7 @@ class BookProcessFragment(private val isWish: Boolean) : Fragment(), WishHaveBoo
 
     //읽고 싶은 책 상세보기
     override fun wishItemClick(bookIsbn: String) {
+        Log.d(TAG, "wishItemClick: 클릭 $bookIsbn")
         MyApplication.prefs.setDetail("detail", true)
         bookProcessViewModel.getBookDetail(bookIsbn)
     }

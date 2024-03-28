@@ -30,6 +30,7 @@ import com.choisong.bookshelf.R
 import com.choisong.bookshelf.databinding.FragmentDetailBinding
 import com.choisong.bookshelf.model.AddHaveBookModel
 import com.choisong.bookshelf.model.TestReviewModel
+import com.choisong.bookshelf.view.activity.HomeActivity
 import com.choisong.bookshelf.view.adapter.ReviewAdapter
 import com.choisong.bookshelf.view.dialog.ReviewDialog
 import com.choisong.bookshelf.viewmodel.DetailViewModel
@@ -91,6 +92,7 @@ class DetailFragment : Fragment(), ReviewDialog.OnDialogCloseListener, ReviewAda
     }
 
     private fun init() = with(binding){
+        (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
         rb.setIsIndicator(true)
 
@@ -334,6 +336,7 @@ class DetailFragment : Fragment(), ReviewDialog.OnDialogCloseListener, ReviewAda
 
     override fun onDestroyView() {
         super.onDestroyView()
+        (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.VISIBLE
         _binding = null
     }
 }

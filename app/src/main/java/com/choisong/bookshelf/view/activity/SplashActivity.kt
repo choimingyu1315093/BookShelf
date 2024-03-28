@@ -1,20 +1,23 @@
 package com.choisong.bookshelf.view.activity
 
 import android.Manifest
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import com.choisong.bookshelf.databinding.ActivitySplashBinding
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
+
+    companion object {
+        const val TAG = "SplashActivity"
+    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,48 +25,39 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        checkPermission()
-        bindViews()
+        requestPermission()
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun checkPermission(){
-        var permission = mutableMapOf<String, String>()
-        permission["fine"] = Manifest.permission.ACCESS_FINE_LOCATION
-        permission["coarse"] = Manifest.permission.ACCESS_COARSE_LOCATION
-        permission["write"] = Manifest.permission.WRITE_EXTERNAL_STORAGE
-        permission["read"] = Manifest.permission.READ_EXTERNAL_STORAGE
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-            permission["notification"] = Manifest.permission.POST_NOTIFICATIONS
-        }
-        permission["notification"] = Manifest.permission.POST_NOTIFICATIONS
+    private fun requestPermission(){
+        val permissions = mutableListOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
 
-
-        var denied = permission.count{
-            ContextCompat.checkSelfPermission(this, it.value) == PackageManager.PERMISSION_DENIED
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
 
-        if(denied > 0){
-            requestPermissions(permission.values.toTypedArray(), 1)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
         }
-    }
 
-    private fun bindViews() = with(binding){
-        btnStart.setOnClickListener {
-            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
-            startActivity(intent)
-        }
-    }
+        TedPermission.create()
+            .setPermissionListener(object : PermissionListener {
+                override fun onPermissionGranted() {
+                    binding.btnStart.setOnClickListener {
+                        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 1){
-            grantResults.forEach {
-                Log.d("TAG", "onRequestPermissionsResult: $it")
-//                if(it == PackageManager.PERMISSION_DENIED){
-//                    Toast.makeText(applicationContext, "서비스의 필요한 권한입니다.\n권한에 동의해주세요.", Toast.LENGTH_SHORT).show()
-//                }
-            }
-        }
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    Log.d(TAG, "거부된 권한들: $deniedPermissions")
+                    Toast.makeText(this@SplashActivity, "필요한 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+            .setDeniedMessage("필요한 권한을 허용해주세요.")
+            .setPermissions(*permissions.toTypedArray())
+            .check()
     }
 }

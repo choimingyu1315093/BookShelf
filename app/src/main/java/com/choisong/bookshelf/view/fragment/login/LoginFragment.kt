@@ -1,6 +1,7 @@
 package com.choisong.bookshelf.view.fragment.login
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
@@ -17,6 +18,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -41,6 +43,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -71,16 +75,13 @@ class LoginFragment : Fragment() {
 
     companion object {
         const val TAG = "LoginFragment"
-        const val REQ_ONE_TAP = 2
-        const val showOneTapUI = true
     }
 
     lateinit var oneTapClient: SignInClient
     lateinit var signUpRequest: BeginSignInRequest
-    private var locationManager: LocationManager? = null
 
     private lateinit var auth: FirebaseAuth
-
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var goLogin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +97,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getLocation()
+//        getLocation()
+        getLastLocation()
         getFcmToken()
         init()
         bindViews()
@@ -114,24 +116,21 @@ class LoginFragment : Fragment() {
             .build()
     }
 
-    private fun getLocation() = with(binding){
-        locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-        var userLocation = getLatLng()
-        Log.d(TAG, "getLocation: $userLocation")
-        MyApplication.prefs.setLatitude("lat", userLocation.latitude.toFloat())
-        MyApplication.prefs.setLongitude("lng", userLocation.longitude.toFloat())
-    }
-    
-    private fun getLatLng(): Location = with(binding){
-        var currentLatLng: Location? = null
-        if(ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            getLatLng()
-        }else {
-            val locationProvider = LocationManager.GPS_PROVIDER
-            currentLatLng = locationManager?.getLastKnownLocation(locationProvider)
+    private fun getLastLocation() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return
         }
-        return currentLatLng!!
+
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                if (location != null) {
+                    Log.d(TAG, "getLastLocation: location ${location.latitude}, ${location.longitude}")
+                    MyApplication.prefs.setLatitude("lat", location.latitude.toFloat())
+                    MyApplication.prefs.setLongitude("lng", location.longitude.toFloat())
+                }
+            }
     }
 
     private fun getFcmToken(){
@@ -151,23 +150,6 @@ class LoginFragment : Fragment() {
             val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(etId.windowToken, 0)
         }
-
-        etPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val passwordPattern = Regex("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!]).{8,15}$")
-                if(s.toString().isNotEmpty()){
-                    if(passwordPattern.matches(s.toString())){
-//                        txtWarning.visibility = View.GONE
-                    }else {
-//                        txtWarning.visibility = View.VISIBLE
-                    }
-                }else {
-//                    txtWarning.visibility = View.GONE
-                }
-            }
-            override fun afterTextChanged(s: Editable?) = Unit
-        })
     }
 
     private fun bindViews() = with(binding){

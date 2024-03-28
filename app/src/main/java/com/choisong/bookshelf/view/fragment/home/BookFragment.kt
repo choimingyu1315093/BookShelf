@@ -16,11 +16,10 @@ import com.choisong.bookshelf.view.adapter.VPAdapter
 import com.choisong.bookshelf.viewmodel.BookProcessViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class BookFragment : Fragment() {
     private var _binding: FragmentBookBinding? = null
     private val binding get() = _binding!!
-    private val bookProcessViewModel: BookProcessViewModel by viewModels()
+    private val bookProcessViewModel: BookProcessViewModel by activityViewModels()
 
     companion object {
         const val TAG = "BookFragment"
@@ -32,9 +31,9 @@ class BookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
-        bookProcessViewModel.haveBook(accessToken)
-        bookProcessViewModel.wishBook(accessToken)
+//        accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
+//        bookProcessViewModel.haveBook(accessToken)
+//        bookProcessViewModel.wishBook(accessToken)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,6 +65,7 @@ class BookFragment : Fragment() {
     
     private fun observeViewModel() = with(binding){
         bookProcessViewModel.bookDetailResult.observe(viewLifecycleOwner){
+            Log.d(TAG, "wishItemClick: 호출 ${MyApplication.prefs.getDetail("detail", false)}")
             if(MyApplication.prefs.getDetail("detail", false)){
                 val action = BookFragmentDirections.actionBookFragmentToDetailFragment(null, null, null, "bookFragment", it)
                 Navigation.findNavController(binding.root).navigate(action)
