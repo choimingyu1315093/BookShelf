@@ -72,7 +72,7 @@ class ChatFragment : Fragment(), ChatListBodyAdapter.OnClickListener {
     private fun init() = with(binding){
         (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.VISIBLE
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
-        Log.d(TAG, "init: accessToken $accessToken")
+
         connectSocket()
     }
 
@@ -166,7 +166,6 @@ class ChatFragment : Fragment(), ChatListBodyAdapter.OnClickListener {
         }
     }
 
-    //채팅방가기
     override fun goChatroom(chatroomIdx: Int, image: String) {
         val action = ChatFragmentDirections.actionChatFragmentToChatroomFragment(chatroomIdx, image)
         Navigation.findNavController(binding.root).navigate(action)

@@ -25,15 +25,10 @@ class BookFragment : Fragment() {
         const val TAG = "BookFragment"
     }
 
-    private lateinit var accessToken: String
     lateinit var vpAdapter: VPAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
-//        bookProcessViewModel.haveBook(accessToken)
-//        bookProcessViewModel.wishBook(accessToken)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,7 +60,6 @@ class BookFragment : Fragment() {
     
     private fun observeViewModel() = with(binding){
         bookProcessViewModel.bookDetailResult.observe(viewLifecycleOwner){
-            Log.d(TAG, "wishItemClick: 호출 ${MyApplication.prefs.getDetail("detail", false)}")
             if(MyApplication.prefs.getDetail("detail", false)){
                 val action = BookFragmentDirections.actionBookFragmentToDetailFragment(null, null, null, "bookFragment", it)
                 Navigation.findNavController(binding.root).navigate(action)

@@ -143,11 +143,6 @@ class ProfileFragment : Fragment() {
                 cl2.visibility = View.VISIBLE
                 tvPoint.text = it.data.ticket_count.toString()
             }
-
-//            swChat.isChecked = it.data.setting_chat_alarm == 1
-//            swMarketing.isChecked = it.data.setting_marketing_alarm == 1
-//            swNear.isChecked = it.data.setting_wish_book_alarm == 1
-//            swChatRequest.isChecked = it.data.setting_chat_receive == 1
         }
     }
 

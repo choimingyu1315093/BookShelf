@@ -36,7 +36,6 @@ class ChatMessageAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var chatMessage = chatMessageList[position]
-        //2023-12-08T07:57:11.948Z
         val parts = chatMessage.create_date.split("T", "Z")
         var date = parts[0]
         var time = parts[1].substringBefore(".")
@@ -62,38 +61,10 @@ class ChatMessageAdapter(
             }
         }
 
-
-        //첫대화이거나 날짜가 다르면
-//        if (position == 0 || differentDay) {
-//            holder.tvDate.visibility = View.VISIBLE
-//            holder.tvDate.text =
-//                date.split("-")[0] + "년 " + date.split("-")[1] + "월 " + date.split("-")[2] + "일"
-//
-//            var set = ConstraintSet()
-//            set.clone(holder.cl)
-//            set.connect(
-//                holder.tvSender.id,
-//                ConstraintSet.TOP,
-//                holder.tvDate.id,
-//                ConstraintSet.BOTTOM
-//            )
-//            set.connect(
-//                holder.tvReceiver.id,
-//                ConstraintSet.TOP,
-//                holder.tvDate.id,
-//                ConstraintSet.BOTTOM
-//            )
-//            set.applyTo(holder.cl)
-//        } else {
-//            holder.tvDate.visibility = View.GONE
-//        }
-
-        //메세지는 반드시 null이 아니다
         if (chatMessage.message_content != "") {
             var firstItemPosition = 0
             var lastItemPosition = 0
 
-            //첫 대화시 position은 0으로 잡힌다
             if(position != 0){
                 for (i in position downTo 0) {
                     if (chatMessageList[i].users.user_idx != chatMessageList[position].users.user_idx) {

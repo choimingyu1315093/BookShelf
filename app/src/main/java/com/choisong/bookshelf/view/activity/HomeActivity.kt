@@ -41,17 +41,6 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
     }
 
-//    override fun onBackPressed() {
-//        if(backKeyPressedTime + 3000 > System.currentTimeMillis()){
-//            super.onBackPressed()
-//            finish()
-//        }else {
-//            Toast.makeText(this, "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        backKeyPressedTime = System.currentTimeMillis()
-//    }
-
     override fun onBackPressed() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navBackStackEntry = navHostFragment.navController.currentBackStackEntry
@@ -78,28 +67,6 @@ class HomeActivity : AppCompatActivity() {
 
                         backKeyPressedTime = System.currentTimeMillis()
                     }
-//                    if(extractedText == "AddProjectManagerFragment" || extractedText == "BrandManagerFragment" || extractedText == "MarketingManagerFragment"
-//                        || extractedText == "EmployeeManagementFragment" || extractedText == "MessageListFragment" || extractedText == "BillFragment"
-//                        || extractedText == "CardFragment" || extractedText == "BankFragment" || extractedText == "MyPageFragment"){
-//                        if(backKeyPressedTime + 3000 > System.currentTimeMillis()){
-//                            super.onBackPressed()
-//                            finish()
-//                        }else {
-//                            Toast.makeText(this, "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-//                        }
-//
-//                        backKeyPressedTime = System.currentTimeMillis()
-//                    }else if(extractedText == "AddEmployeeFragment"){
-//                        Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_addEmployeeFragment_to_employeeManagementFragment)
-//                    }else if(extractedText == "AddProjectManagerDetailFragment"){
-//                        Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_addProjectManagerDetailFragment_to_addProjectManagerFragment)
-//                    }else if(extractedText == "EmployeeDetailFragment"){
-//                        Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_employeeDetailFragment_to_employeeManagementFragment)
-//                    }else if(extractedText == "MarketingDetailFragment"){
-//                        Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_marketingDetailFragment_to_marketingManagerFragment)
-//                    }else {
-//                        super.onBackPressed()
-//                    }
                 }else {
                     Log.d("TAG", "onBackPressed: 매칭되는 부분이 없습니다.")
                 }

@@ -59,7 +59,6 @@ class NotificationListDialog : DialogFragment(), NotificationAdapter.OnClickList
 
     private fun init() = with(binding){
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
-//        notificationViewModel.alarmList(accessToken)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val window = dialog?.window
@@ -124,8 +123,8 @@ class NotificationListDialog : DialogFragment(), NotificationAdapter.OnClickList
         notificationViewModel.deleteAllAlarm(accessToken)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

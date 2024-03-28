@@ -90,8 +90,8 @@ class NearBookDialog(private val title: String, private val img: String, private
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

@@ -82,7 +82,6 @@ class BestsellerSearchDialog(private val onDialogCancel: OnDialogCancel) : Dialo
         }
     }
 
-    //베스트셀러 외국도서 조건 선택
     override fun foreignItemClick(b: Boolean, c: String, n: Int) {
         MyApplication.prefs.setBestsellerCountry("country", c)
         MyApplication.prefs.setBestsellerNum("num", n)
@@ -101,8 +100,8 @@ class BestsellerSearchDialog(private val onDialogCancel: OnDialogCancel) : Dialo
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

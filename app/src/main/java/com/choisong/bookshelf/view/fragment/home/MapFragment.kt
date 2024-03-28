@@ -147,7 +147,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, NearBookAdapter.OnClickListe
         }
     }
 
-    //리사이클러뷰에 있는 책 클릭
     override fun nearBookClick(nearBook: IWishBookHaveUserDataResult) {
         var clickLocation = LatLng(nearBook.current_latitude!!.toDouble(), nearBook.current_longitude!!.toDouble())
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(clickLocation, 13f)

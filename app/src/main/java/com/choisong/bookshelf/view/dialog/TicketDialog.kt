@@ -61,8 +61,8 @@ class TicketDialog(private val userIdx: Int) : DialogFragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
