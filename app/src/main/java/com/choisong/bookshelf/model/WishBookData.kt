@@ -7,7 +7,7 @@ data class WishBookData(
 
 data class WishBookDataResult(
     val books: WishBooks,
-    val wish_book_idx: Int
+    val my_book_idx: Int
 )
 
 data class WishBooks(

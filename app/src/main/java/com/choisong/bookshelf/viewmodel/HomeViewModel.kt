@@ -86,17 +86,6 @@ class HomeViewModel @Inject constructor(
                     Log.d("TAG", "moreBookList: Failed")
                 }
             }
-//            searchBookMoreApi.moreBookList(page, bookName).let { response ->
-//                if(response.isSuccessful){
-//                    response.body().let { result ->
-//                        Log.d("TAG", "bookList: Success $result")
-//                        _generalMoreBook.postValue(result?.data)
-//                        _isEnd.postValue(result?.is_end)
-//                    }
-//                }else {
-//                    Log.d("TAG", "bookList: Failed")
-//                }
-//            }
         }
     }
 

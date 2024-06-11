@@ -118,11 +118,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, NearBookAdapter.OnClickListe
 
                             map.addMarker(marker)
                             map.setOnMarkerClickListener { marker ->
-                                var title = marker.title.split("^^")[0]
-                                var img = marker.title.split("^^")[1]
-                                var name = marker.title.split("^^")[2]
-                                var userIdx = marker.title.split("^^")[3]
-                                var isbn = marker.title.split("^^")[4]
+                                val title = marker.title.split("^^")[0]
+                                val img = marker.title.split("^^")[1]
+                                val name = marker.title.split("^^")[2]
+                                val userIdx = marker.title.split("^^")[3]
+                                val isbn = marker.title.split("^^")[4]
                                 image = img
                                 val dialog = NearBookDialog(title, img, name, userIdx.toInt(), isbn, this@MapFragment)
                                 dialog.show(requireActivity().supportFragmentManager, "NearBookDialog")
@@ -148,6 +148,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, NearBookAdapter.OnClickListe
     }
 
     override fun nearBookClick(nearBook: IWishBookHaveUserDataResult) {
+        Log.d(TAG, "nearBookClick: nearBook $nearBook")
+        val dialog = NearBookDialog(nearBook.book_name!!, nearBook.book_image!!, nearBook.user_name!!, nearBook.user_idx!!.toInt(), nearBook.book_isbn!!, this@MapFragment)
+        dialog.show(requireActivity().supportFragmentManager, "NearBookDialog")
+
         var clickLocation = LatLng(nearBook.current_latitude!!.toDouble(), nearBook.current_longitude!!.toDouble())
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(clickLocation, 13f)
         map.animateCamera(cameraUpdate)
@@ -158,9 +162,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, NearBookAdapter.OnClickListe
         map = googleMap
     }
 
-    override fun isClose(b: Boolean, chatroomIdx: Int) {
+    override fun isClose(b: Boolean, chatroomIdx: Int, name: String) {
         if(b){
-            val action = MapFragmentDirections.actionMapFragmentToChatroomFragment(chatroomIdx, image)
+            val action = MapFragmentDirections.actionMapFragmentToChatroomFragment(chatroomIdx, image, name)
             Navigation.findNavController(binding.root).navigate(action)
             (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
         }

@@ -5,8 +5,9 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#FF333333</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFC700</color>
 
     <color name="main">#11891D</color>
 <!--    <color name="main">#005B41</color>-->
@@ -16,5 +17,5 @@
     <color name="edit_stroke_color">#767676</color>
     <color name="color767676">#767676</color>
     <color name="colorACACAC">#ACACAC</color>
-    <color name="colore9e9e9">#E9E9E9</color>
+    <color name="color9e9e9">#E9E9E9</color>
 </resources>

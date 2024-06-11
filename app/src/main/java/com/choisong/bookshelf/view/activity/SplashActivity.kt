@@ -8,7 +8,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.choisong.bookshelf.MyApplication
 import com.choisong.bookshelf.databinding.ActivitySplashBinding
+import com.choisong.bookshelf.view.fragment.login.LoginFragment
+import com.google.firebase.messaging.FirebaseMessaging
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 
@@ -46,6 +49,7 @@ class SplashActivity : AppCompatActivity() {
             .setPermissionListener(object : PermissionListener {
                 override fun onPermissionGranted() {
                     binding.btnStart.setOnClickListener {
+                        getFcmToken()
                         val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                         startActivity(intent)
                     }
@@ -59,5 +63,18 @@ class SplashActivity : AppCompatActivity() {
             .setDeniedMessage("필요한 권한을 허용해주세요.")
             .setPermissions(*permissions.toTypedArray())
             .check()
+    }
+
+    private fun getFcmToken(){
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result
+                    Log.d(LoginFragment.TAG, "login getFcmToken: $token")
+                    MyApplication.prefs.setFcmToken("fcmToken", token)
+                } else {
+                    Log.e("FCM Token", "Failed to get token: ${task.exception}")
+                }
+            }
     }
 }

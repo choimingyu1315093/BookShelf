@@ -13,13 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ReviewAdapter(private val commentList: ArrayList<BookDetailComment>, private val onClickListener: OnClickListener): RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
-
-    var nick = MyApplication.prefs.getNickname("nickname", "")
-
-    interface OnClickListener{
-        fun itemClick(type: String, idx: Int)
-    }
+class ReviewAdapter(private val commentList: ArrayList<BookDetailComment>): RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -37,6 +31,7 @@ class ReviewAdapter(private val commentList: ArrayList<BookDetailComment>, priva
 
         fun bind(comment: BookDetailComment) = with(binding){
             rb.rating = comment.comment_rate.toFloat()
+            tvAverage.text = comment.comment_rate.toString()
             tvDescription.text = comment.comment_content
             tvWriter.text = comment.users.user_name
 
@@ -99,21 +94,6 @@ class ReviewAdapter(private val commentList: ArrayList<BookDetailComment>, priva
                 } else {
                     rcvdDate
                 }
-
-            if(nick == comment.users.user_name){
-                btnDelete.visibility = View.VISIBLE
-                btnDelete.setOnClickListener {
-                    onClickListener.itemClick("delete", comment.book_comment_idx)
-                }
-
-                btnUpdate.visibility = View.VISIBLE
-                btnUpdate.setOnClickListener {
-                    onClickListener.itemClick("update", comment.book_comment_idx)
-                }
-            }else {
-                btnDelete.visibility = View.GONE
-                btnUpdate.visibility = View.GONE
-            }
         }
     }
 }

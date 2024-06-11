@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.choisong.bookshelf.R
 import com.choisong.bookshelf.databinding.ItemChargeLogBinding
 import com.choisong.bookshelf.model.TestChargeLogModel
+import com.choisong.bookshelf.model.TicketLogDataResult
 
-class ChargeLogAdapter(private val context: Context, private val chargeLogList: ArrayList<TestChargeLogModel>): RecyclerView.Adapter<ChargeLogAdapter.ViewHolder>() {
+class ChargeLogAdapter(private val context: Context, private val chargeLogList: ArrayList<TicketLogDataResult>): RecyclerView.Adapter<ChargeLogAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemChargeLogBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -24,13 +25,18 @@ class ChargeLogAdapter(private val context: Context, private val chargeLogList: 
 
     inner class ViewHolder(private val binding: ItemChargeLogBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(chargeLog: TestChargeLogModel) = with(binding){
-            if(chargeLog.point.toString().startsWith("-")){
-                tvPoint.text = chargeLog.point.toString()
+        fun bind(ticketLogo: TicketLogDataResult) = with(binding){
+            if(ticketLogo.ticket_log_count.toString().startsWith("-")){
+                tvPoint.text = "${ticketLogo.ticket_log_count.toString()} 권"
             }else {
                 tvPoint.setTextColor(context.resources.getColor(R.color.main))
-                tvPoint.text = chargeLog.point.toString()
+                tvPoint.text = "${ticketLogo.ticket_log_count.toString()} 권"
             }
+            tvDescription.text = ticketLogo.ticket_log_description
+
+            val dateTimeParts = ticketLogo.create_date.split("T")
+            val datePart = dateTimeParts[0]
+            tvDate.text = "$datePart"
         }
     }
 }

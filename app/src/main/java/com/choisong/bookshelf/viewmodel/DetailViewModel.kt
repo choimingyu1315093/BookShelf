@@ -13,26 +13,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val haveBookApi: GetHaveBookApi,
-    private val addHaveBookApi: PostAddHaveBookApi,
-    private val deleteHaveBookApi: DeleteHaveBookApi,
-    private val addWishBookApi: PostAddWishBookApi,
-    private val wishBookApi: GetWishBookApi,
-    private val deleteWishBookApi: DeleteWishBookApi,
     private val bookDetailApi: GetBookDetailApi,
-    private val deleteCommentApi: DeleteCommentApi): ViewModel(){
+    private val addMyBookApi: PostMyBookApi,
+    private val bookMemoApi: GetBookMemoApi): ViewModel(){
 
-    private var _haveBookResult = MutableLiveData<ArrayList<HaveBookDataResult>?>()
-    val haveBookResult: LiveData<ArrayList<HaveBookDataResult>?>
-    get() = _haveBookResult
-
-    private var _addHaveBookResult = MutableLiveData<String>()
-    val addHaveBookResult: LiveData<String>
-    get() = _addHaveBookResult
-
-    private var _wishBookResult = MutableLiveData<ArrayList<WishBookDataResult>?>()
-    val wishBookResult: LiveData<ArrayList<WishBookDataResult>?>
-    get() = _wishBookResult
+    private var _addMyBookResult = MutableLiveData<Boolean>()
+    val addMyBookResult: LiveData<Boolean>
+    get() = _addMyBookResult
 
     private var _addWishBookResult = MutableLiveData<String>()
     val addWishBookResult: LiveData<String>
@@ -46,97 +33,28 @@ class DetailViewModel @Inject constructor(
     val deleteCommentResult: LiveData<Boolean>
     get() = _deleteCommentResult
 
-    fun haveBook(accessToken: String){
+    private var _bookMemoResult = MutableLiveData<ArrayList<BookMemoDataResult>>()
+    val bookMemoResult: LiveData<ArrayList<BookMemoDataResult>>
+    get() = _bookMemoResult
+
+    fun addMyBook(accessToken: String, addMyBookModel: AddMyBookModel){
         viewModelScope.launch {
-            haveBookApi.haveBook("Bearer $accessToken").let { response ->
+            addMyBookApi.addMyBooks("Bearer $accessToken", addMyBookModel).let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
-                        Log.d("TAG", "haveBook: Success $result")
-                        _haveBookResult.postValue(result!!.data)
+                        Log.d("TAG", "addMyBooks: Success $result")
+                        _addMyBookResult.postValue(result!!.result)
                     }
                 }else {
-                    Log.d("TAG", "haveBook: Failed")
+                    Log.d("TAG", "addMyBooks: Failed")
                 }
             }
         }
     }
 
-    fun addHaveBook(accessToken: String, addHaveBookModel: AddHaveBookModel){
+    fun getBookDetail(accessToken: String, bookIsbn: String){
         viewModelScope.launch {
-            addHaveBookApi.addHaveBook("Bearer $accessToken", addHaveBookModel).let { response ->
-                if(response.isSuccessful){
-                    response.body().let { result ->
-                        Log.d("TAG", "addHaveBook: Success $result")
-                        _addHaveBookResult.postValue(result!!.data.have_book_idx)
-                    }
-                }else {
-                    Log.d("TAG", "addHaveBook: Failed")
-                }
-            }
-        }
-    }
-
-    fun deleteHaveBook(accessToken: String, bookIdx: Int){
-        viewModelScope.launch {
-            deleteHaveBookApi.deleteHaveBook("Bearer $accessToken", bookIdx).let { response ->
-                if(response.isSuccessful){
-                    response.body().let { result ->
-                        Log.d("TAG", "deleteHaveBook: Success $result")
-                    }
-                }else {
-                    Log.d("TAG", "deleteHaveBook: Failed")
-                }
-            }
-        }
-    }
-
-    fun addWishBook(accessToken: String, addHaveBookModel: AddHaveBookModel){
-        viewModelScope.launch {
-            addWishBookApi.addWishBook("Bearer $accessToken", addHaveBookModel).let { response ->
-                if(response.isSuccessful){
-                    response.body().let { result ->
-                        Log.d("TAG", "addWishBook: Success $result")
-                        _addWishBookResult.postValue(result!!.data.wish_book_idx)
-                    }
-                }else {
-                    Log.d("TAG", "addWishBook: Failed")
-                }
-            }
-        }
-    }
-
-    fun wishBook(accessToken: String){
-        viewModelScope.launch {
-            wishBookApi.wishBook("Bearer $accessToken").let { response ->
-                if(response.isSuccessful){
-                    response.body().let { result ->
-                        Log.d("TAG", "wishBook: Success $result")
-                        _wishBookResult.postValue(result!!.data)
-                    }
-                }else {
-                    Log.d("TAG", "wishBook: Failed")
-                }
-            }
-        }
-    }
-
-    fun deleteWishBook(accessToken: String, bookIdx: Int){
-        viewModelScope.launch {
-            deleteWishBookApi.deleteWishBook("Bearer $accessToken", bookIdx).let { response ->
-                if(response.isSuccessful){
-                    response.body().let { result ->
-                        Log.d("TAG", "deleteWishBook: Success $result")
-                    }
-                }else {
-                    Log.d("TAG", "deleteWishBook: Failed")
-                }
-            }
-        }
-    }
-
-    fun getBookDetail(bookIsbn: String){
-        viewModelScope.launch {
-            bookDetailApi.getBookDetail(bookIsbn).let { response ->
+            bookDetailApi.getBookDetail("Bearer $accessToken", bookIsbn).let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "getBookDetail: Success $result")
@@ -149,16 +67,16 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun deleteComment(accessToken: String, idx: Int){
+    fun getBookMemo(accessToken: String, bookIsbn: String, type: String){
         viewModelScope.launch {
-            deleteCommentApi.deleteComment("Bearer $accessToken", idx).let { response ->
+            bookMemoApi.getBookMemo("Bearer $accessToken", bookIsbn, type).let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
-                        Log.d("TAG", "deleteComment: Success $result")
-                        _deleteCommentResult.postValue(result!!.result)
+                        Log.d("TAG", "getBookMemo: Success $result")
+                        _bookMemoResult.postValue(result!!.data)
                     }
                 }else {
-                    Log.d("TAG", "deleteComment: Failed")
+                    Log.d("TAG", "getBookMemo: Failed")
                 }
             }
         }

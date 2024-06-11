@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.choisong.bookshelf.databinding.FragmentSignUpSuccessBinding
 import com.choisong.bookshelf.view.activity.LoginActivity
+import com.choisong.bookshelf.viewmodel.SignUpViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -50,8 +53,8 @@ class SignUpSuccessFragment : DialogFragment() {
     }
 
     private suspend fun finish(){
-        Toast.makeText(requireContext(), "가입해주셔서 감사합니다.\n이벤트로 교환권을\n지급해 드립니다.", Toast.LENGTH_SHORT).show()
-        delay(3000)
+        Toast.makeText(requireContext(), "가입해주셔서 감사합니다.\n이벤트로 교환권을 지급해 드립니다.", Toast.LENGTH_SHORT).show()
+        delay(4300)
         val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)
     }

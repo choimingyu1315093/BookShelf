@@ -27,7 +27,8 @@ data class PopularResult(
     val book_average_rate: Double?,
     val book_comments: ArrayList<SearchBookComment>?,
     val book_content: String,
-    val book_tag: String?
+    val is_have_book: Boolean?,
+    val read_type: String?
 ): Parcelable
 
 @Parcelize
@@ -41,7 +42,8 @@ data class GeneralResult(
     val book_average_rate: Double?,
     val book_comments: ArrayList<SearchBookComment>?,
     val book_content: String,
-    val book_tag: String?
+    val is_have_book: Boolean?,
+    val read_type: String?
 ): Parcelable
 
 @Parcelize

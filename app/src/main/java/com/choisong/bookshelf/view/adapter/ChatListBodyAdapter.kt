@@ -19,7 +19,7 @@ import kotlin.collections.ArrayList
 class ChatListBodyAdapter(private val chatroomList: ArrayList<ChatListDataResult>, private val onClickListener: OnClickListener): RecyclerView.Adapter<ChatListBodyAdapter.ViewHolder>() {
 
     interface OnClickListener {
-        fun goChatroom(chatroomIdx: Int, image: String)
+        fun goChatroom(chatroomIdx: Int, image: String, name: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +29,7 @@ class ChatListBodyAdapter(private val chatroomList: ArrayList<ChatListDataResult
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(chatroomList[position])
         holder.itemView.setOnClickListener {
-            onClickListener.goChatroom(chatroomList[position].chat_room_idx, chatroomList[position].books.book_image)
+            onClickListener.goChatroom(chatroomList[position].chat_room_idx, chatroomList[position].books.book_image, chatroomList[position].opponent_user[0].users.user_name)
         }
     }
 

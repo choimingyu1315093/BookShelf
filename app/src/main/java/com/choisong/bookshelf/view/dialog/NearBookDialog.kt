@@ -29,7 +29,7 @@ class NearBookDialog(private val title: String, private val img: String, private
     }
 
     interface OnDialogClose{
-        fun isClose(b: Boolean, chatroomIdx: Int)
+        fun isClose(b: Boolean, chatroomIdx: Int, name: String)
     }
 
     lateinit var accessToken: String
@@ -85,7 +85,7 @@ class NearBookDialog(private val title: String, private val img: String, private
         }
 
         nearBookViewModel.chatroomIdx.observe(viewLifecycleOwner){
-            onDialogClose.isClose(true, it)
+            onDialogClose.isClose(true, it, name)
             dismiss()
         }
     }

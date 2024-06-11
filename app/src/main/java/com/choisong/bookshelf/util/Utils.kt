@@ -12,7 +12,7 @@ import kotlin.random.Random
 object Utils {
     fun showNotification(context: Context, title: String, body: String, pendingIntent: PendingIntent){
         val builder = NotificationCompat.Builder(context, "edmt.dev.channel")
-            .setSmallIcon(R.drawable.icon_app4)
+            .setSmallIcon(R.drawable.bookshelf_logo)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentTitle(title)
             .setContentText(body)
@@ -27,11 +27,6 @@ object Utils {
             manager.createNotificationChannel(channel)
             builder.setChannelId(channelId)
         }
-//        val channelId = "edmt.dev.channel.id"
-//        val channel = NotificationChannel(channelId, "EDMTDEV Channel", NotificationManager.IMPORTANCE_HIGH)
-//
-//        manager.createNotificationChannel(channel)
-//        builder.setChannelId(channelId)
 
         manager.notify(Random.nextInt(), builder.build())
     }

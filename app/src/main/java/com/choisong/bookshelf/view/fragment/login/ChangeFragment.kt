@@ -40,8 +40,6 @@ class ChangeFragment : Fragment() {
     private var firstNext = false
     private var secondNext = false
 
-    private var isChanged = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,7 +60,6 @@ class ChangeFragment : Fragment() {
 
     private fun init() = with(binding){
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
-        Log.d(TAG, "init: accessToken $accessToken")
         
         cl.setOnClickListener {
             val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -105,8 +102,7 @@ class ChangeFragment : Fragment() {
                 if(etPasswordCheck.text.toString().trim() != ""){
                     if(etPassword.text.toString() == etPasswordCheck.text.toString()){
                         if(firstNext && secondNext){
-                            isChanged = true
-                            val changePasswordModel = ChangePasswordModel(etPassword.text.toString())
+                            val changePasswordModel = ChangePasswordModel(etCurrentPassword.text.toString().trim(), etPassword.text.toString().trim())
                             loginViewModel.changePassword(accessToken, changePasswordModel)
                         }
                     }
@@ -121,13 +117,12 @@ class ChangeFragment : Fragment() {
 
     private fun observeViewModel() = with(binding){
         loginViewModel.changePasswordResult.observe(viewLifecycleOwner){
-            if(isChanged){
-                if(it){
-                    Toast.makeText(requireContext(), "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireContext(), LoginActivity::class.java)
-                    startActivity(intent)
-                }
-                isChanged = false
+            if(it){
+                Toast.makeText(requireContext(), "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+            }else {
+                Toast.makeText(requireContext(), "잘못된 비밀번호입니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }

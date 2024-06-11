@@ -18,7 +18,6 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/background"
         android:fitsSystemWindows="true"
         app:itemBackground="@drawable/bnv_tab_background"
         app:labelVisibilityMode="unlabeled"

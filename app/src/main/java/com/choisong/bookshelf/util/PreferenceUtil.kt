@@ -30,6 +30,14 @@ class PreferenceUtil(context: Context) {
         prefs.edit().putString(key, defValue).apply()
     }
 
+    //UserIdx
+    fun getUserIdx(key: String, defValue: Int): Int {
+        return prefs.getInt(key, defValue)
+    }
+    fun setUserIdx(key: String, defValue: Int){
+        prefs.edit().putInt(key, defValue).apply()
+    }
+
     //KakaoToken
     fun getKakaoToken(key: String, defValue: String): String {
         return prefs.getString(key, defValue).toString()
@@ -59,6 +67,14 @@ class PreferenceUtil(context: Context) {
         return prefs.getString(key, defValue).toString()
     }
     fun setNickname(key: String, defValue: String){
+        prefs.edit().putString(key, defValue).apply()
+    }
+
+    //Description
+    fun getDescription(key: String, defValue: String): String {
+        return prefs.getString(key, defValue).toString()
+    }
+    fun setDescription(key: String, defValue: String){
         prefs.edit().putString(key, defValue).apply()
     }
 
@@ -148,5 +164,13 @@ class PreferenceUtil(context: Context) {
     }
     fun setChatUserIdx(key: String, defValue: Int){
         prefs.edit().putInt(key, defValue).apply()
+    }
+
+    //ID
+    fun getId(key: String, defValue: String): String {
+        return prefs.getString(key, defValue).toString()
+    }
+    fun setId(key: String, defValue: String){
+        prefs.edit().putString(key, defValue).apply()
     }
 }

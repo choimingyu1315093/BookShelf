@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,20 +23,21 @@ import com.choisong.bookshelf.viewmodel.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReviewDialog(private val bookIsbn: String, private val title: String, private val type: String, private val idx: Int, private val onDialogCloseListener: OnDialogCloseListener) : DialogFragment() {
+class ReviewDialog(private val bookIsbn: String, private val onDialogCloseListener: OnDialogCloseListener) : DialogFragment() {
     private var _binding: FragmentReviewDialogBinding? = null
     private val binding get() = _binding!!
     private val reviewViewModel: ReviewViewModel by viewModels()
 
-    interface OnDialogCloseListener{
-        fun dialogClose(b: Boolean)
-    }
-    
     companion object {
         const val TAG = "ReviewDialog"
     }
 
+    interface OnDialogCloseListener {
+        fun commentReload(b: Boolean)
+    }
+
     private lateinit var accessToken: String
+    private var comment = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,34 +70,29 @@ class ReviewDialog(private val bookIsbn: String, private val title: String, priv
 
     private fun init() = with(binding){
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
-
-        txtReview.text = title
-        btnOk.setText(type)
-
         cl.setOnClickListener {
             val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(etReview.windowToken, 0)
         }
+
+        etReview.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                comment = s.toString().trim()
+            }
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
     }
 
     private fun bindViews() = with(binding){
         btnCancel.setOnClickListener { dismiss() }
 
         btnOk.setOnClickListener {
-            if(etReview.text.toString() != ""){
-                if(rb.rating != 0.0f){
-                    if(type == "등록"){
-                        val addCommentModel = AddCommentModel(bookIsbn, etReview.text.toString(), rb.rating.toDouble())
-                        reviewViewModel.addComment(accessToken, addCommentModel)
-                    }else {
-                        val updateCommentModel = UpdateCommentModel(rb.rating.toDouble(), etReview.text.toString())
-                        reviewViewModel.updateComment(accessToken, idx, updateCommentModel)
-                    }
-                }else {
-                    Toast.makeText(requireContext(), "평점을 선택해 주세요.", Toast.LENGTH_SHORT).show()
-                }
+            if(comment == ""){
+                Toast.makeText(requireContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }else {
-                Toast.makeText(requireContext(), "내용을 입력해 주세요.", Toast.LENGTH_SHORT).show()
+                val addCommentModel = AddCommentModel(bookIsbn, comment, rb.rating.toDouble())
+                reviewViewModel.addComment(accessToken, addCommentModel)
             }
         }
     }
@@ -102,15 +100,8 @@ class ReviewDialog(private val bookIsbn: String, private val title: String, priv
     private fun observeViewModel() = with(binding){
         reviewViewModel.addCommentResult.observe(viewLifecycleOwner){
             if(it){
-                onDialogCloseListener.dialogClose(true)
                 dismiss()
-            }
-        }
-
-        reviewViewModel.updateCommentResult.observe(viewLifecycleOwner){
-            if(it){
-                onDialogCloseListener.dialogClose(true)
-                dismiss()
+                onDialogCloseListener.commentReload(true)
             }
         }
     }

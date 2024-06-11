@@ -32,11 +32,16 @@ class NearBookAdapter(private val nearBookList: ArrayList<IWishBookHaveUserDataR
     inner class ViewHolder(private val binding: ItemNearBookBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(nearBook: IWishBookHaveUserDataResult) = with(binding){
-            tvTitle.text = nearBookList[position].book_name
-            tvWriter.text = "${nearBookList[position].book_author} ⎪ ${nearBookList[position].book_publisher}"
-            tvUser.text = "${nearBookList[position].user_name}님이 보유 중인 책이에요."
+            tvTitle.text = nearBook.book_name
+            if(nearBook.book_author == ""){
+                tvWriter.text = "${nearBook.book_publisher}"
+            }else {
+                tvWriter.text = "${nearBook.book_author} ⎪ ${nearBook.book_publisher}"
+            }
+
+            tvUser.text = "${nearBook.user_name}님이 보유 중인 책이에요."
             tvDistance.text = "${metersToKilometers(nearBook.distance!!.toDouble())}km"
-            Glide.with(ivBook).load(nearBookList[position].book_image).into(ivBook)
+            Glide.with(ivBook).load(nearBook.book_image).into(ivBook)
         }
 
         fun metersToKilometers(meters: Double): Double{

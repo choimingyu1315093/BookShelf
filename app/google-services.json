@@ -12,7 +12,12 @@
           "package_name": "com.choisong.bookshelf"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "987536608427-qikbl06p61dr7gah2p3fdp2ka3homo7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA4HYax2yF9t7ckTsZtixlsl4NryluDux8"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987536608427-qikbl06p61dr7gah2p3fdp2ka3homo7j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

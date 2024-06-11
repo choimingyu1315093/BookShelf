@@ -6,14 +6,16 @@ import com.choisong.bookshelf.view.fragment.home.BookProcessFragment
 
 class VPAdapter(private val fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
     override fun createFragment(position: Int): Fragment {
         if(position == 0){
-            return BookProcessFragment(true)
+            return BookProcessFragment("읽고 싶은 책")
+        }else if(position == 1){
+            return BookProcessFragment("읽고 있는 책")
         }else {
-            return BookProcessFragment(false)
+            return BookProcessFragment("읽은 책")
         }
     }
 }

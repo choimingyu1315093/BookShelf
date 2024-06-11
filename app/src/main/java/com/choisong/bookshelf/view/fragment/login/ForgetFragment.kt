@@ -20,11 +20,10 @@ import com.choisong.bookshelf.viewmodel.LoginViewModel_Factory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
-@AndroidEntryPoint
 class ForgetFragment : Fragment() {
     private var _binding: FragmentForgetBinding? = null
     private val binding get() = _binding!!
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by activityViewModels()
 
     companion object {
         const val TAG = "ForgetFragment"

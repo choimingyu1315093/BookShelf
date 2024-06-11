@@ -6,15 +6,12 @@ data class MyProfileData(
 )
 
 data class MyProfileResultData(
-    val create_date: String?,
-    val current_latitude: String?,
-    val current_longitude: String?,
-    val delete_date: String?,
-    val fcm_token: String?,
-    val login_type: String?,
-    val user_email: String?,
-    val user_id: String?,
     val user_idx: Int?,
     val user_name: String?,
-    val user_point: Int?
+    val user_description: String?,
+    val user_point: Int?,
+    val user_grade: String?,
+    val user_max_point: Int?,
+    val relation_count: Int?,
+    val relation_request_count: Int?
 )

@@ -10,19 +10,13 @@ import javax.inject.Inject
 
 class ServiceRepository @Inject constructor(
     private val alarmListApi: GetAlarmListApi,
-    private val iWishBookHaveUserApi: GetIWishBookHaveUserApi,
-    private val userProfileApi: GetUserProfileApi) {
+    private val iWishBookHaveUserApi: GetIWishBookHaveUserApi) {
 
     val accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
 
 
     fun getIWishBookHaveUserList() = flow<IWishBookHaveUserData> {
         val data = iWishBookHaveUserApi.getIWishBookHaveUser("Bearer $accessToken").body()
-        emit(data!!)
-    }
-
-    fun getUserProfile() = flow<UserProfileData> {
-        val data = userProfileApi.getUserProfile("Bearer $accessToken").body()
         emit(data!!)
     }
 }

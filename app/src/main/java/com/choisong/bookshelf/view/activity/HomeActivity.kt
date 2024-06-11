@@ -6,8 +6,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.choisong.bookshelf.R
@@ -36,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.bookFragment, R.id.chatFragment, R.id.profileFragment))
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.bookFragment, R.id.mapFragment, R.id.profileFragment, R.id.settingFragment))
 
         bottomNavigationView.setupWithNavController(navController)
     }
@@ -54,9 +56,12 @@ class HomeActivity : AppCompatActivity() {
                 val matcher = pattern.matcher(fragmentClass)
                 if (matcher.find()) {
                     val extractedText = matcher.group(1)
-                    Log.d("TAG", "onBackPressed: $extractedText")
                     if(extractedText == "ChatroomFragment"){
                         Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_chatroomFragment_to_chatFragment)
+                    }else if(extractedText == "ChatFragment"){
+                        Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_chatFragment_to_homeFragment)
+                    }else if(extractedText == "ProfileChangeFragment"){
+                        Navigation.findNavController(binding.fragmentContainerView).popBackStack()
                     }else {
                         if(backKeyPressedTime + 3000 > System.currentTimeMillis()){
                             super.onBackPressed()

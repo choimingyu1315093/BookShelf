@@ -3,16 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_nav"
-    app:startDestination="@id/agreeFragment">
-
+    app:startDestination="@id/agreePageFragment">
     <fragment
-        android:id="@+id/agreeFragment"
-        android:name="com.choisong.bookshelf.view.fragment.signup.AgreeFragment"
-        android:label="fragment_agree"
-        tools:layout="@layout/fragment_agree" >
+        android:id="@+id/agreePageFragment"
+        android:name="com.choisong.bookshelf.view.fragment.signup.AgreePageFragment"
+        android:label="fragment_agree_page"
+        tools:layout="@layout/fragment_agree_page" >
         <action
-            android:id="@+id/action_agreeFragment_to_signUpSuccessFragment"
+            android:id="@+id/action_agreePageFragment_to_enterInfoFragment"
+            app:destination="@id/enterInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterInfoFragment"
+        android:name="com.choisong.bookshelf.view.fragment.signup.EnterInfoFragment"
+        android:label="fragment_enter_info"
+        tools:layout="@layout/fragment_enter_info" >
+        <action
+            android:id="@+id/action_enterInfoFragment_to_signUpSuccessFragment"
             app:destination="@id/signUpSuccessFragment" />
+        <action
+            android:id="@+id/action_enterInfoFragment_to_agreePageFragment"
+            app:destination="@id/agreePageFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpSuccessFragment"

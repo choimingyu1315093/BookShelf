@@ -6,20 +6,27 @@ import com.choisong.bookshelf.model.AlarmListData
 import com.choisong.bookshelf.model.AlarmListDataResult
 import com.choisong.bookshelf.network.DeleteAlarmApi
 import com.choisong.bookshelf.network.DeleteAllAlarmApi
+import com.choisong.bookshelf.network.GetAlarmCountApi
 import com.choisong.bookshelf.network.GetAlarmListApi
 import com.choisong.bookshelf.repository.ServiceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.apache.commons.lang3.mutable.Mutable
 import javax.inject.Inject
 
 @HiltViewModel
 class NotificationViewModel @Inject constructor(
     private val serviceRepository: ServiceRepository,
+    private val getAlarmCountApi: GetAlarmCountApi,
     private val getAlarmListApi: GetAlarmListApi,
     private val deleteAlarmApi: DeleteAlarmApi,
     private val deleteAllAlarmApi: DeleteAllAlarmApi): ViewModel() {
 
 //    val alarmListResult = serviceRepository.getAlarmList().asLiveData()
+
+    private var _alarmCountResult = MutableLiveData<Int>()
+    val alarmCountResult: LiveData<Int>
+    get() = _alarmCountResult
 
     private var _alarmListResult = MutableLiveData<AlarmListData>()
     val alarmListResult: LiveData<AlarmListData>
@@ -32,6 +39,21 @@ class NotificationViewModel @Inject constructor(
     private var _deleteAllAlarmResult = MutableLiveData<Boolean>()
     val deleteAllAlarmResult: LiveData<Boolean>
         get() = _deleteAllAlarmResult
+
+    fun alarmCount(accessToken: String){
+        viewModelScope.launch {
+            getAlarmCountApi.getAlarmCount("Bearer $accessToken").let { response ->
+                if(response.isSuccessful){
+                    response.body().let { result ->
+                        Log.d("TAG", "getAlarmCount: Success $result")
+                        _alarmCountResult.postValue(result!!.data)
+                    }
+                }else {
+                    Log.d("TAG", "getAlarmCount: Failed")
+                }
+            }
+        }
+    }
 
     fun alarmList(accessToken: String){
         viewModelScope.launch {

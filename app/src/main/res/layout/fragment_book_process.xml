@@ -45,7 +45,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
-            android:text="읽고 싶은 책이 없어요."
             android:fontFamily="@font/lato_regular"
             android:textColor="#b3b3b3"
             android:textSize="18sp"

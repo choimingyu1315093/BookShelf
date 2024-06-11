@@ -1,5 +1,6 @@
 package com.choisong.bookshelf.model
 
 data class ChangePasswordModel(
-    val user_password: String
+    val current_password: String,
+    val change_password: String
 )

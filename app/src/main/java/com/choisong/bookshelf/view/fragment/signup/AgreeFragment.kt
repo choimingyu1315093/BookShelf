@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.choisong.bookshelf.MyApplication
 import com.choisong.bookshelf.R
 import com.choisong.bookshelf.databinding.FragmentAgreeBinding
 import com.choisong.bookshelf.model.EmailCheckModel
@@ -34,9 +35,9 @@ class AgreeFragment : Fragment() {
     }
 
     private var id = ""
+    private var email = ""
     private var password = ""
     private var nickname = ""
-    private var email = ""
 
     private var idCheck = false
     private var passwordCheck = false
@@ -188,7 +189,8 @@ class AgreeFragment : Fragment() {
         }
 
         btnSignUp.setOnClickListener {
-            val signUpModel = SignUpModel("", "general", email, id, nickname, password)
+            val signUpModel = SignUpModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "general", email, id, nickname, password)
+            Log.d(TAG, "bindViews: signUpModel $signUpModel")
             signUpViewModel.signUp(signUpModel)
         }
     }

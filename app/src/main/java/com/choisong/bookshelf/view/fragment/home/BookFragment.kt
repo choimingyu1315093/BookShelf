@@ -52,7 +52,10 @@ class BookFragment : Fragment() {
                     tab.text = "읽고 싶은 책"
                 }
                 1 -> {
-                    tab.text = "보유 중인 책"
+                    tab.text = "읽고 있는 책"
+                }
+                2 -> {
+                    tab.text = "읽은 책"
                 }
             }
         }.attach()

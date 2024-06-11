@@ -7,7 +7,7 @@ data class HaveBookData(
 
 data class HaveBookDataResult(
     val books: HaveBooks,
-    val have_book_idx: Int
+    val my_book_idx: Int
 )
 
 data class HaveBooks(

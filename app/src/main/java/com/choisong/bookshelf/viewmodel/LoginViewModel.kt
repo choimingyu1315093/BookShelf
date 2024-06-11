@@ -19,6 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val findIdApi: PostFindIdApi,
     private val findPasswordApi: PostFindPasswordApi,
     private val changePasswordApi: PatchChangePasswordApi,
     private val signInApi: PostSignInApi,
@@ -26,6 +27,10 @@ class LoginViewModel @Inject constructor(
     private val myProfileApi: GetMyProfileApi,
     private val signUpApi: PostSignUpApi,
     private val snsSignUpApi: PostSnsSignUpApi): ViewModel(){
+
+    private var _findIdResult = MutableLiveData<Boolean>()
+    val findIdResult: LiveData<Boolean>
+        get() = _findIdResult
 
     private var _findPasswordResult = MutableLiveData<Boolean>()
     val findPasswordResult: LiveData<Boolean>
@@ -55,6 +60,22 @@ class LoginViewModel @Inject constructor(
     val snsSignUpResult: LiveData<Boolean>
         get() = _snsSignUpResult
 
+    fun findId(findIdModel: FindIdModel){
+        viewModelScope.launch {
+            findIdApi.findId(findIdModel).let { response ->
+                if(response.isSuccessful){
+                    response.body().let { result ->
+                        Log.d("TAG", "findId: Success $result")
+                        _findIdResult.postValue(result!!.result)
+                        MyApplication.prefs.setId("id", result.data.data)
+                    }
+                }else {
+                    Log.d("TAG", "findId: Failed")
+                    _findIdResult.postValue(false)
+                }
+            }
+        }
+    }
 
     fun findPassword(findPasswordModel: FindPasswordModel){
         viewModelScope.launch {
@@ -77,12 +98,14 @@ class LoginViewModel @Inject constructor(
             changePasswordApi.changePassword("Bearer $accessToken", changePasswordModel).let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
-                        Log.d("TAG", "changePassword: Success $result")
+                        Log.d("TAG", "`changePassword`: Success $result")
                         _changePasswordResult.postValue(result?.result)
                     }
                 }else {
-                    Log.d("TAG", "changePassword: Failed")
-                    _changePasswordResult.postValue(false)
+                    response.body().let { result ->
+                        Log.d("TAG", "changePassword: Failed $result")
+                        _changePasswordResult.postValue(false)
+                    }
                 }
             }
         }
@@ -94,7 +117,8 @@ class LoginViewModel @Inject constructor(
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "signIn: Success $result")
-                        MyApplication.prefs.setAccessToken("accessToken", result!!.data.data)
+                        MyApplication.prefs.setAccessToken("accessToken", result!!.data.access_token)
+                        MyApplication.prefs.setUserIdx("userIdx", result.data.user_idx)
                         _signInResult.postValue(result.result)
                     }
                 }else {
@@ -111,7 +135,9 @@ class LoginViewModel @Inject constructor(
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "snsSignIn: Success $result")
-                        _snsSignInResult.postValue(result!!.result)
+                        MyApplication.prefs.setAccessToken("accessToken", result!!.data.access_token)
+                        MyApplication.prefs.setUserIdx("userIdx", result.data.user_idx)
+                        _snsSignInResult.postValue(result.result)
                     }
                 }else {
                     Log.d("TAG", "snsSignIn: Failed")
@@ -128,6 +154,7 @@ class LoginViewModel @Inject constructor(
                     response.body().let { result ->
                         Log.d("TAG", "myProfile: Success $result")
                         MyApplication.prefs.setNickname("nickname", result!!.data.user_name!!)
+                        MyApplication.prefs.setDescription("description", result.data.user_description!!)
                         _myProfileResult.postValue(result.result)
                     }
                 }else {

@@ -5,13 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.home.ChargeFragment">
+    android:background="@color/background"
+    tools:context=".view.fragment.setting.ChargeFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="250dp"
         android:elevation="10dp"
+        android:background="@color/main"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -20,45 +22,19 @@
             android:id="@+id/ivBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/icon_back"/>
+            android:layout_gravity="top"
+            android:src="@drawable/icon_cancel2"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="충전하기"
+            android:text="교환권 10장"
+            android:textStyle="bold"
             android:fontFamily="@font/lato_regular"
-            android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:textColor="@color/white"
             android:layout_marginStart="10dp"/>
-        <TextView
-            android:id="@+id/tvPoint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:text="5000"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="26dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="3dp"
-            android:src="@drawable/icon_charge5"/>
     </androidx.appcompat.widget.Toolbar>
-    <TextView
-        android:id="@+id/txtPayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="구매"
-        android:fontFamily="@font/lato_regular"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView
         android:id="@+id/iv1"
@@ -67,7 +43,7 @@
         android:src="@drawable/icon_charge5"
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/txtPayment"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"/>
     <TextView
         android:layout_width="wrap_content"

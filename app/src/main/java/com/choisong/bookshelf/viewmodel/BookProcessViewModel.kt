@@ -35,9 +35,10 @@ class BookProcessViewModel @Inject constructor(
     val bookDetailResult: LiveData<BookDetailDataResult>
         get() = _bookDetailResult
 
+    //보유 중인 책
     fun haveBook(accessToken: String){
         viewModelScope.launch {
-            haveBookApi.haveBook("Bearer $accessToken").let { response ->
+            haveBookApi.haveBook("Bearer $accessToken", "y").let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "haveBook: Success $result")
@@ -50,9 +51,10 @@ class BookProcessViewModel @Inject constructor(
         }
     }
 
-    fun wishBook(accessToken: String){
+    //읽고 싶은 책
+    fun wishBook(accessToken: String, readType: String){
         viewModelScope.launch {
-            wishBookApi.wishBook("Bearer $accessToken").let { response ->
+            wishBookApi.wishBook("Bearer $accessToken", readType).let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "wishBook: Success $result")
@@ -65,9 +67,9 @@ class BookProcessViewModel @Inject constructor(
         }
     }
 
-    fun getBookDetail(bookIsbn: String){
+    fun getBookDetail(accessToken: String, bookIsbn: String){
         viewModelScope.launch {
-            bookDetailApi.getBookDetail(bookIsbn).let { response ->
+            bookDetailApi.getBookDetail("Bearer $accessToken", bookIsbn).let { response ->
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "getBookDetail: Success $result")

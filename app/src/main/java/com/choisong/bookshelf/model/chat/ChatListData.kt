@@ -1,33 +1,34 @@
 package com.choisong.bookshelf.model.chat
 
 data class ChatListData(
-    val result: ArrayList<ChatListDataResult>
+    val result: List<ChatListDataResult>
 )
 
 data class ChatListDataResult(
-    val books: ChatListDataResultBooks,
+    val books: Books,
     val chat_room_idx: Int,
     val me_user: MeUser,
     val opponent_user: List<OpponentUser>,
     val recent_message: String,
-    val recent_message_date: String?
+    val recent_message_date: String
 )
 
-data class ChatListDataResultBooks(
+data class Books(
     val book_image: String
 )
 
 data class MeUser(
     val unread_count: Int,
-    val users: chatListUsers
+    val users: Users
 )
 
 data class OpponentUser(
     val unread_count: Int,
-    val users: chatListUsers
+    val users: Users
 )
 
-data class chatListUsers(
+
+data class Users(
     val user_idx: Int,
     val user_name: String
 )

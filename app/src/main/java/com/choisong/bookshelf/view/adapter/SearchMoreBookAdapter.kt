@@ -45,13 +45,29 @@ class SearchMoreBookAdapter(private val bookList: ArrayList<GeneralResult>, priv
             tvWriter.text = "${book.book_author} ⎪ ${book.book_publisher}"
             rb.setIsIndicator(true)
             rb.visibility = View.GONE
-            if(book.book_tag == null){
-                btnHaveBook.visibility = View.GONE
-                btnWishBook.visibility = View.GONE
-            }else if(book.book_tag == "wish_book"){
-                btnWishBook.visibility = View.VISIBLE
-            }else if(book.book_tag == "have_book"){
+
+            if(book.is_have_book != null && book.is_have_book){
                 btnHaveBook.visibility = View.VISIBLE
+            }else {
+                btnHaveBook.visibility = View.GONE
+            }
+
+            if(book.read_type != null){
+                when(book.read_type){
+                    "wish" -> {
+                        btnWishBook.visibility = View.VISIBLE
+                    }
+                    "reading" -> {
+                        btnReadingBook.visibility = View.VISIBLE
+                    }
+                    "read" -> {
+                        btnReadBook.visibility = View.VISIBLE
+                    }
+                }
+            }else {
+                btnWishBook.visibility = View.GONE
+                btnReadingBook.visibility = View.GONE
+                btnReadBook.visibility = View.GONE
             }
         }
     }

@@ -8,6 +8,6 @@ data class SignInData(
 )
 
 data class SignInResultData(
-    val data: String,
-    val result: Boolean
+    val access_token: String,
+    val user_idx: Int
 )

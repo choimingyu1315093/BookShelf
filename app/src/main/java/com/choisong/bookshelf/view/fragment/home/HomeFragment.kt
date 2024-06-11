@@ -100,12 +100,9 @@ class HomeFragment : Fragment(), BestsellerAdapter.OnClickListener, BestsellerSe
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
 
         val userLocation = UserLocationModel(MyApplication.prefs.getLatitude("lat", 0f), MyApplication.prefs.getLongitude("lng", 0f))
-        Log.d(TAG, "init: userLocation $userLocation")
         homeViewModel.setUserLocation(accessToken, userLocation)
         homeViewModel.getBestseller(num, country)
-        notificationViewModel.alarmList(accessToken)
-
-        tvNick.text = "Hi, ${nick}님"
+        notificationViewModel.alarmCount(accessToken)
 
         cl.setOnClickListener {
             val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -114,7 +111,13 @@ class HomeFragment : Fragment(), BestsellerAdapter.OnClickListener, BestsellerSe
     }
 
     private fun bindViews() = with(binding){
+        ivChat.setOnClickListener {
+            (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
+            Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment_to_chatFragment)
+        }
+
         ivBell.setOnClickListener {
+            (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
             Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment_to_notificationFragment)
         }
 
@@ -124,7 +127,6 @@ class HomeFragment : Fragment(), BestsellerAdapter.OnClickListener, BestsellerSe
                 searchKeyword(etSearch.text.toString().trim())
                 val manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 manager.hideSoftInputFromWindow(etSearch.windowToken, 0)
-//                view?.clearFocus()
                 return@setOnEditorActionListener true
             }
 
@@ -235,12 +237,12 @@ class HomeFragment : Fragment(), BestsellerAdapter.OnClickListener, BestsellerSe
             }
         }
 
-        notificationViewModel.alarmListResult.observe(viewLifecycleOwner){
-            if(it.data?.size != 0){
-                tvNotifyCount.visibility = View.VISIBLE
-                tvNotifyCount.text = it.data!!.size.toString()
-            }else {
+        notificationViewModel.alarmCountResult.observe(viewLifecycleOwner){
+            if(it == 0){
                 tvNotifyCount.visibility = View.GONE
+            }else {
+                tvNotifyCount.visibility = View.VISIBLE
+                tvNotifyCount.text = it.toString()
             }
         }
     }
@@ -249,7 +251,6 @@ class HomeFragment : Fragment(), BestsellerAdapter.OnClickListener, BestsellerSe
     override fun next(b: Boolean) {
         country = MyApplication.prefs.getBestsellerCountry("country", "Book")
         num = MyApplication.prefs.getBestsellerNum("num", 0)
-        Log.d(TAG, "next: $num, $country")
         homeViewModel.getBestseller(num, country)
     }
 
@@ -261,6 +262,7 @@ class HomeFragment : Fragment(), BestsellerAdapter.OnClickListener, BestsellerSe
 
     //베스트셀러 상세보기
     override fun bestsellerClick(bestseller: BestsellerResultData) {
+        Log.d(TAG, "bestsellerClick: $bestseller")
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(bestseller, null, null, "bestseller", null)
         Navigation.findNavController(binding.root).navigate(action)
         (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE

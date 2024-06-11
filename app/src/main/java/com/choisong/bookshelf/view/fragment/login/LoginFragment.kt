@@ -8,6 +8,7 @@ import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -33,6 +34,7 @@ import com.choisong.bookshelf.model.SnsSignUpModel
 import com.choisong.bookshelf.view.activity.HomeActivity
 import com.choisong.bookshelf.view.activity.LoginActivity
 import com.choisong.bookshelf.view.activity.SignUpActivity
+import com.choisong.bookshelf.view.activity.SplashActivity
 import com.choisong.bookshelf.viewmodel.LoginViewModel
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
@@ -49,6 +51,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.messaging.FirebaseMessaging
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
@@ -82,7 +86,12 @@ class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var goLogin = false
+
+    private var id = ""
+    private var password = ""
+
+    private var isIDCheck = false
+    private var isPWCheck = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,23 +142,86 @@ class LoginFragment : Fragment() {
             }
     }
 
-    private fun getFcmToken(){
-        FirebaseMessaging.getInstance().token
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val token = task.result
-                    MyApplication.prefs.setFcmToken("fcmToken", token)
-                } else {
-                    Log.e("FCM Token", "Failed to get token: ${task.exception}")
-                }
-            }
-    }
-
     private fun init() = with(binding){
         cl.setOnClickListener {
             val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(etId.windowToken, 0)
         }
+
+        requestPermission()
+
+        etId.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isIDCheck = s.toString() != ""
+                id = s.toString()
+                checkNextButtonEnable()
+            }
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
+
+        etPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isPWCheck = s.toString() != ""
+                password = s.toString()
+                checkNextButtonEnable()
+            }
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
+    }
+
+    private fun checkNextButtonEnable() = with(binding) {
+        if(isIDCheck && isPWCheck){
+            btnLogin.isEnabled = true
+            btnLogin.setBackgroundResource(R.drawable.bg_main_no_10)
+        }else {
+            btnLogin.isEnabled = false
+            btnLogin.setBackgroundResource(R.drawable.bg_e9e9e9_e9e9e9_10)
+        }
+    }
+
+    private fun requestPermission(){
+        val permissions = mutableListOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        TedPermission.create()
+            .setPermissionListener(object : PermissionListener {
+                override fun onPermissionGranted() {
+                    getFcmToken()
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    Log.d(TAG, "거부된 권한들: $deniedPermissions")
+                    Toast.makeText(requireContext(), "필요한 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+            .setDeniedMessage("필요한 권한을 허용해주세요.")
+            .setPermissions(*permissions.toTypedArray())
+            .check()
+    }
+
+    private fun getFcmToken(){
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result
+                    Log.d(TAG, "login getFcmToken: $token")
+                    MyApplication.prefs.setFcmToken("fcmToken", token)
+                } else {
+                    Log.e("FCM Token", "Failed to get token: ${task.exception}")
+                }
+            }
     }
 
     private fun bindViews() = with(binding){
@@ -199,11 +271,11 @@ class LoginFragment : Fragment() {
                             if(MyApplication.prefs.getKakaoToken("kakaoToken", "") == ""){
                                 Log.d(TAG, "bindViews: 카카오 회원가입 후 로그인")
                                 MyApplication.prefs.setKakaoToken("kakaoToken", authorizationCode)
-                                val snsSignUpModel = SnsSignUpModel("", "kakao", email, MyApplication.prefs.getKakaoToken("kakaoToken", ""), nickname)
+                                val snsSignUpModel = SnsSignUpModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "kakao", email, MyApplication.prefs.getKakaoToken("kakaoToken", ""), nickname)
                                 loginViewModel.snsSignUp(snsSignUpModel)
                             }else {
                                 Log.d(TAG, "bindViews: 카카오 로그인")
-                                val snsSignInModel = SnsSignInModel("", "kakao", MyApplication.prefs.getKakaoToken("kakaoToken", ""))
+                                val snsSignInModel = SnsSignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "kakao", MyApplication.prefs.getKakaoToken("kakaoToken", ""))
                                 loginViewModel.snsSignIn(snsSignInModel)
                             }
                             MyApplication.prefs.setLoginType("loginType", "kakao")
@@ -226,11 +298,11 @@ class LoginFragment : Fragment() {
                             if(MyApplication.prefs.getNaverToken("naverToken","")  == ""){
                                 Log.d(TAG, "bindViews: 네이버 회원가입 후 로그인")
                                 MyApplication.prefs.setNaverToken("naverToken", NaverIdLoginSDK.getAccessToken()!!)
-                                val snsSignUpModel = SnsSignUpModel("", "naver", email, MyApplication.prefs.getNaverToken("naverToken", ""), nickname)
+                                val snsSignUpModel = SnsSignUpModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "naver", email, MyApplication.prefs.getNaverToken("naverToken", ""), nickname)
                                 loginViewModel.snsSignUp(snsSignUpModel)
                             }else {
                                 Log.d(TAG, "bindViews: 네이버 로그인")
-                                val snsSignInModel = SnsSignInModel("", "naver", MyApplication.prefs.getNaverToken("naverToken", ""))
+                                val snsSignInModel = SnsSignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "naver", MyApplication.prefs.getNaverToken("naverToken", ""))
                                 loginViewModel.snsSignIn(snsSignInModel)
                             }
                             MyApplication.prefs.setLoginType("loginType", "naver")
@@ -257,32 +329,33 @@ class LoginFragment : Fragment() {
             NaverIdLoginSDK.authenticate(requireContext(), oauthLoginCallback)
         }
 
-        txtForget.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_passwordFragment)
+        txtFindId.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_findIdFragment)
         }
 
-        btnSignUp.setOnClickListener {
+        txtFindPw.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_findPwFragment)
+        }
+
+        txtSignup.setOnClickListener {
             val intent = Intent(requireContext(), SignUpActivity::class.java)
             startActivity(intent)
         }
 
         btnLogin.setOnClickListener {
-            goLogin = true
-            val signInModel = SignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "general", etId.text.toString(), etPassword.text.toString())
+            val signInModel = SignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "general", id, password)
+            Log.d(TAG, "bindViews: signInModel $signInModel")
             loginViewModel.signIn(signInModel)
         }
     }
 
     private fun observeViewModel() = with(binding){
         loginViewModel.signInResult.observe(viewLifecycleOwner){
-            if(goLogin){
-                if(it){
-                    MyApplication.prefs.setLoginType("loginType", "general")
-                    loginViewModel.myProfile(MyApplication.prefs.getAccessToken("accessToken", ""))
-                }else {
-                    Toast.makeText(requireContext(), "입력하신 정보와 일치하는 회원이 없습니다.", Toast.LENGTH_SHORT).show()
-                }
-                goLogin = false
+            if(it){
+                MyApplication.prefs.setLoginType("loginType", "general")
+                loginViewModel.myProfile(MyApplication.prefs.getAccessToken("accessToken", ""))
+            }else {
+                Toast.makeText(requireContext(), "입력하신 정보와 일치하는 회원이 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -370,11 +443,11 @@ class LoginFragment : Fragment() {
                 if(MyApplication.prefs.getGoogleToken("googleToken","")  == ""){
                     Log.d(TAG, "bindViews: 구글 회원가입 후 로그인")
                     MyApplication.prefs.setGoogleToken("googleToken", account.idToken!!)
-                    val snsSignUpModel = SnsSignUpModel("", "google", email, MyApplication.prefs.getGoogleToken("googleToken", ""), nickname)
+                    val snsSignUpModel = SnsSignUpModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "google", email, MyApplication.prefs.getGoogleToken("googleToken", ""), nickname)
                     loginViewModel.snsSignUp(snsSignUpModel)
                 }else {
                     Log.d(TAG, "bindViews: 구글 로그인")
-                    val snsSignInModel = SnsSignInModel("", "google", MyApplication.prefs.getGoogleToken("googleToken", ""))
+                    val snsSignInModel = SnsSignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "google", MyApplication.prefs.getGoogleToken("googleToken", ""))
                     loginViewModel.snsSignIn(snsSignInModel)
                 }
                 MyApplication.prefs.setLoginType("loginType", "google")

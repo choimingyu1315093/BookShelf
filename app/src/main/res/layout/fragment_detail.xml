@@ -1,229 +1,508 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_detail6"
-    tools:context=".view.fragment.home.DetailFragment">
+    android:background="@color/background"
+    tools:context=".view.fragment.detail.DetailFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_new_24"/>
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:layout_marginTop="20dp">-->
-
-<!--            -->
-<!--        </LinearLayout>-->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                android:layout_width="72dp"
+                android:layout_height="31dp"
+                android:text="저장"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_main_no_10"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl1"
+                android:id="@+id/clMain"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="82dp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/ivBook"
-                    android:layout_width="230dp"
-                    android:layout_height="340dp"
-                    android:layout_marginBottom="16dp"
-                    android:scaleType="fitXY"
-                    tools:src="@drawable/test_book"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:orientation="vertical"-->
-            <!--                android:background="@drawable/bg_top50_left50">-->
-
-            <!--               -->
-            <!--            </LinearLayout>-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="100dp"
-                app:layout_constraintTop_toBottomOf="@id/cl1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/bg_top50_left50">
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/swHave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="30dp"
-                    android:checked="false"
-                    android:text="보유 중인 책  "
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:thumb="@drawable/switch_thumb"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:track="@drawable/switch_track_selector" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/swWish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="30dp"
-                    android:checked="false"
-                    android:text="읽고 싶은 책  "
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:thumb="@drawable/switch_thumb"
-                    app:layout_constraintStart_toEndOf="@id/swHave"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:track="@drawable/switch_track_selector" />
-
-                <TextView
-                    android:id="@+id/tvDescription"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="4"
-                    android:text="돈은 법인보다 더 정교하고 구체적인 인격체다. 어떤 돈은 사람과 같이 어울리기 좋아하고 몰려다니며, 어떤 돈은 숨어서 평생을 지내기도 한다. 자기들끼리 주로 가는 곳이 따로 있고 유행에 따라 모이고 흩어진다. 자기를 소중히 여기는 사람에게 붙어 있기를 좋아하고, 함부로 대하는 사람에겐 패가망신의 보복을 퍼붓기도 한다. 작은 돈을 함부로 하는 사람에게선 큰돈이 몰려서 떠나고 자신에게 합당한 대우를 하는 사람 곁에서는 자식(이자)을 낳기도 한다. (19쪽)
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivBook"
+                        android:layout_width="120dp"
+                        android:layout_height="170dp"
+                        tools:src="@drawable/test_book"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="돈의 속성"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/lato_regular"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivBook"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                    <TextView
+                        android:id="@+id/txtAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="저자 "
+                        android:textSize="16sp"
+                        android:textColor="@color/color767676"
+                        android:fontFamily="@font/lato_regular"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                        app:layout_constraintStart_toEndOf="@id/ivBook"/>
+                    <TextView
+                        android:id="@+id/tvAuthor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="홍길동"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/lato_regular"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toTopOf="@id/txtAuthor"
+                        app:layout_constraintStart_toEndOf="@id/txtAuthor"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                    <TextView
+                        android:id="@+id/txtPublisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="출판사 "
+                        android:textSize="16sp"
+                        android:textColor="@color/color767676"
+                        android:fontFamily="@font/lato_regular"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/txtAuthor"
+                        app:layout_constraintStart_toEndOf="@id/ivBook"/>
+                    <TextView
+                        android:id="@+id/tvPublisher"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="OO출판사"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/lato_regular"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toTopOf="@id/txtPublisher"
+                        app:layout_constraintStart_toEndOf="@id/txtPublisher"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                    <TextView
+                        android:id="@+id/txtTranslator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="번역 "
+                        android:textSize="16sp"
+                        android:textColor="@color/color767676"
+                        android:fontFamily="@font/lato_regular"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/txtPublisher"
+                        app:layout_constraintStart_toEndOf="@id/ivBook"/>
+                    <TextView
+                        android:id="@+id/tvTranslator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="김범수"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/lato_regular"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toTopOf="@id/txtTranslator"
+                        app:layout_constraintStart_toEndOf="@id/txtTranslator"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/cl1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="4"
+                        android:text="돈은 법인보다 더 정교하고 구체적인 인격체다. 어떤 돈은 사람과 같이 어울리기 좋아하고 몰려다니며, 어떤 돈은 숨어서 평생을 지내기도 한다. 자기들끼리 주로 가는 곳이 따로 있고 유행에 따라 모이고 흩어진다. 자기를 소중히 여기는 사람에게 붙어 있기를 좋아하고, 함부로 대하는 사람에겐 패가망신의 보복을 퍼붓기도 한다. 작은 돈을 함부로 하는 사람에게선 큰돈이 몰려서 떠나고 자신에게 합당한 대우를 하는 사람 곁에서는 자식(이자)을 낳기도 한다. (19쪽)
 비정규적인 수입은 한 번에 몰려온 돈이라 실제 가치보다 커 보이는 착각을 일으킨다. 그래서 자신이 많은 돈을 벌게 된 줄 알고 사치하고 함부로 사용하게 돼 결국 모으지 못하게 된다. 흔한 생각으론 돈이 또 언제 들어올지 모르니 저축을 해가며 살 것 같아도 실제로 그렇게 조정하는 사람은 별로 없다. (34쪽)"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/swWish" />
+                        android:fontFamily="@font/lato_regular"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                    <TextView
+                        android:id="@+id/txtMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="더보기"
+                        android:fontFamily="@font/lato_regular"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:layout_marginTop="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                        tools:visibility="visible" />
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/swHave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="30dp"
+                        android:checked="false"
+                        android:text="보유 중인 책  "
+                        android:fontFamily="@font/lato_regular"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:thumb="@drawable/switch_thumb"
+                        app:track="@drawable/switch_track_selector"
+                        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-                <TextView
-                    android:id="@+id/txtMore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="더보기"
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvDescription"
-                    tools:visibility="visible" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:paddingTop="4dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/swHave"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                <View
-                    android:id="@+id/v"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#979797"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtMore" />
+                        <TextView
+                            android:id="@+id/txtStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="상태"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/lato_regular"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnWishBook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:text="읽고 싶은 책"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="12dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/bg_e9e9e9_no_10"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintTop_toTopOf="@id/txtStatus"
+                            app:layout_constraintBottom_toBottomOf="@id/txtStatus"
+                            app:layout_constraintStart_toEndOf="@id/txtStatus"/>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnReadingBook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:text="읽고 있는 책"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="12dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/bg_e9e9e9_no_10"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintTop_toTopOf="@id/btnWishBook"
+                            app:layout_constraintStart_toEndOf="@id/btnWishBook"/>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnReadBook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:text="읽은 책"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="12dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/bg_e9e9e9_no_10"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintTop_toTopOf="@id/btnReadingBook"
+                            app:layout_constraintStart_toEndOf="@id/btnReadingBook"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/txtReview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16sp"
-                    android:layout_marginTop="20dp"
-                    android:text="리뷰"
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/v" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clReading"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        app:layout_constraintTop_toBottomOf="@id/clStatus"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnDelete"
-                    android:layout_width="50dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="4dp"
-                    android:background="@drawable/bg_redlight_no_10"
-                    android:text="삭제"
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/txtReview"
-                    app:layout_constraintEnd_toStartOf="@id/btnReview"
-                    app:layout_constraintTop_toTopOf="@id/txtReview" />
+                        <TextView
+                            android:id="@+id/txtStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="시작일"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/lato_regular"
+                            android:layout_marginTop="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etStart"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:textColor="@color/color767676"
+                            android:fontFamily="@font/lato_regular"
+                            android:hint="yyyy-mm-dd"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:theme="@style/EditTextStyleLogin"
+                            android:textColorHint="@color/color767676"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_no_white_8"
+                            android:layout_marginStart="8dp"
+                            android:paddingVertical="4dp"
+                            app:layout_constraintStart_toEndOf="@id/txtStart"
+                            app:layout_constraintTop_toTopOf="@id/txtStart"
+                            app:layout_constraintBottom_toBottomOf="@id/txtStart"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clPage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            app:layout_constraintTop_toBottomOf="@id/txtStart"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnReview"
-                    android:layout_width="50dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/bg_green_no_10"
-                    android:text="작성"
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/txtReview"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/txtReview" />
+                            <TextView
+                                android:id="@+id/txtPage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="읽은 페이지"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/lato_regular"
+                                android:layout_marginTop="4dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"/>
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/etPage"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:textColor="@color/color767676"
+                                android:fontFamily="@font/lato_regular"
+                                android:text="0"
+                                android:textSize="14sp"
+                                android:theme="@style/EditTextStyleLogin"
+                                android:textColorHint="@color/color767676"
+                                android:paddingHorizontal="12dp"
+                                android:background="@drawable/bg_no_white_8"
+                                android:layout_marginStart="8dp"
+                                android:paddingVertical="4dp"
+                                app:layout_constraintStart_toEndOf="@id/txtPage"
+                                app:layout_constraintTop_toTopOf="@id/txtPage"
+                                app:layout_constraintBottom_toBottomOf="@id/txtPage"/>
+                            <ProgressBar
+                                android:id="@+id/progress"
+                                android:layout_width="0dp"
+                                android:layout_height="4dp"
+                                android:max="100"
+                                android:progress="0"
+                                android:progressTint="@color/main"
+                                android:layout_marginTop="10dp"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                app:layout_constraintTop_toBottomOf="@id/etPage"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+                            <TextView
+                                android:id="@+id/tvPercent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/color767676"
+                                android:textSize="10sp"
+                                android:fontFamily="@font/lato_regular"
+                                app:layout_constraintTop_toBottomOf="@id/progress"
+                                app:layout_constraintStart_toStartOf="parent"/>
+                            <TextView
+                                android:id="@+id/tvPage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0/300"
+                                android:textSize="10sp"
+                                android:textColor="@color/color767676"
+                                android:fontFamily="@font/lato_regular"
+                                app:layout_constraintTop_toBottomOf="@id/progress"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <RatingBar
-                    android:id="@+id/rb"
-                    style="?android:ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:isIndicator="false"
-                    android:numStars="5"
-                    android:progressTint="#ffcd07"
-                    android:rating="0"
-                    android:secondaryProgressTint="@android:color/transparent"
-                    android:stepSize=".5"
-                    app:layout_constraintBottom_toBottomOf="@id/txtReview"
-                    app:layout_constraintStart_toEndOf="@id/txtReview"
-                    app:layout_constraintTop_toTopOf="@id/txtReview" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clRead"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintTop_toBottomOf="@id/clStatus"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvReview"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginBottom="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtReview" />
+                        <TextView
+                            android:id="@+id/txtStartDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="시작일"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/lato_regular"
+                            android:layout_marginTop="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etStartDate"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:hint="yyyy-mm-dd"
+                            android:focusable="false"
+                            android:inputType="date"
+                            android:textColor="@color/color767676"
+                            android:fontFamily="@font/lato_regular"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:theme="@style/EditTextStyleLogin"
+                            android:textColorHint="@color/color767676"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_no_white_8"
+                            android:layout_marginStart="8dp"
+                            android:paddingVertical="4dp"
+                            app:layout_constraintStart_toEndOf="@id/txtStartDate"
+                            app:layout_constraintTop_toTopOf="@id/txtStartDate"
+                            app:layout_constraintBottom_toBottomOf="@id/txtStartDate"/>
+                        <TextView
+                            android:id="@+id/txtWater"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" ~ "
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/etStartDate"
+                            app:layout_constraintTop_toTopOf="@id/etStartDate"
+                            app:layout_constraintBottom_toBottomOf="@id/etStartDate"/>
+                        <TextView
+                            android:id="@+id/txtEndDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="종료일"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/lato_regular"
+                            android:layout_marginTop="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/txtWater"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etEndDate"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:hint="yyyy-mm-dd"
+                            android:focusable="false"
+                            android:inputType="date"
+                            android:textColor="@color/color767676"
+                            android:fontFamily="@font/lato_regular"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:theme="@style/EditTextStyleLogin"
+                            android:textColorHint="@color/color767676"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_no_white_8"
+                            android:layout_marginStart="8dp"
+                            android:paddingVertical="4dp"
+                            app:layout_constraintStart_toEndOf="@id/txtEndDate"
+                            app:layout_constraintTop_toTopOf="@id/txtEndDate"
+                            app:layout_constraintBottom_toBottomOf="@id/txtEndDate"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlType"
+            android:layout_width="200dp"
+            android:layout_height="52dp"
+            android:background="@color/background"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toBottomOf="@id/ns"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabSelectedTextColor="@color/main"
+            app:tabTextAppearance="@style/tabLayoutStyle"
+            app:tabTextColor="#999999">
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tlType" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -113,6 +113,39 @@ object AppModule {
             .create(GetMyProfileApi::class.java)
     }
 
+    //닉네임 변경
+    @Singleton
+    @Provides
+    fun providePatchNicknameInstance(): PatchNicknameApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PatchNicknameApi::class.java)
+    }
+
+    //한 줄 메시지 변경
+    @Singleton
+    @Provides
+    fun providePatchDescriptionInstance(): PatchDescriptionApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PatchDescriptionApi::class.java)
+    }
+
+    //알람카운트
+    @Singleton
+    @Provides
+    fun provideGetAlarmCountInstance(): GetAlarmCountApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GetAlarmCountApi::class.java)
+    }
+
     //알람리스트
     @Singleton
     @Provides
@@ -144,6 +177,17 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(DeleteAllAlarmApi::class.java)
+    }
+
+    //아이디 찾기
+    @Singleton
+    @Provides
+    fun providePostFindIdInstance(): PostFindIdApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PostFindIdApi::class.java)
     }
 
     //비밀번호 찾기
@@ -322,15 +366,15 @@ object AppModule {
             .create(GetIWishBookHaveUserApi::class.java)
     }
 
-    //프로필
+    //프로필 가져오기
     @Singleton
     @Provides
-    fun provideGetUserProfileInstance(): GetUserProfileApi {
+    fun provideGetUserSettingInstance(): GetUserSettingApi {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(GetUserProfileApi::class.java)
+            .create(GetUserSettingApi::class.java)
     }
 
     //프로필 세팅
@@ -399,6 +443,17 @@ object AppModule {
             .create(PatchChatroomOutApi::class.java)
     }
 
+    //채팅방 나가기
+    @Singleton
+    @Provides
+    fun provideDeleteChatroomInstance(): DeleteChatroomApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(DeleteChatroomApi::class.java)
+    }
+
     //채팅 목록 가져오기
     @Singleton
     @Provides
@@ -411,13 +466,79 @@ object AppModule {
     }
 
     //교환권 구매
+//    @Singleton
+//    @Provides
+//    fun providePatchTicketBuyInstance(): PatchTicketBuyApi {
+//        return Retrofit.Builder()
+//            .baseUrl(Constants.BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//            .create(PatchTicketBuyApi::class.java)
+//    }
+
+    //구매 내역 조회
     @Singleton
     @Provides
-    fun providePatchTicketBuyInstance(): PatchTicketBuyApi {
+    fun provideGetTicketLogInstance(): GetTicketLogApi {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(PatchTicketBuyApi::class.java)
+            .create(GetTicketLogApi::class.java)
+    }
+
+    //보유중인책 등록
+    @Singleton
+    @Provides
+    fun providePostMyBooksInstance(): PostMyBookApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PostMyBookApi::class.java)
+    }
+
+    //프로필 활동 가져오기
+    @Singleton
+    @Provides
+    fun provideGetProfileActive(): GetProfileActiveApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GetProfileActiveApi::class.java)
+    }
+
+    //프로필 메모 가져오기
+    @Singleton
+    @Provides
+    fun provideGetProfileMemo(): GetProfileMemoApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GetProfileMemoApi::class.java)
+    }
+
+    //메모 등록
+    @Singleton
+    @Provides
+    fun providePostAddMemo(): PostAddMemoApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PostAddMemoApi::class.java)
+    }
+
+    //책 메모 가져오기
+    @Singleton
+    @Provides
+    fun provideGetBookMemo(): GetBookMemoApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GetBookMemoApi::class.java)
     }
 }

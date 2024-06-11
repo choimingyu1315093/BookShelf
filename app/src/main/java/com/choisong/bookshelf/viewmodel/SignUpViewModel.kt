@@ -8,10 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.choisong.bookshelf.model.EmailCheckModel
 import com.choisong.bookshelf.model.IdCheckData
 import com.choisong.bookshelf.model.SignUpModel
-import com.choisong.bookshelf.network.PostEmailCheckApi
-import com.choisong.bookshelf.network.PostIdCheckApi
-import com.choisong.bookshelf.network.PostNicknameCheckApi
-import com.choisong.bookshelf.network.PostSignUpApi
+import com.choisong.bookshelf.model.TicketBuyModel
+import com.choisong.bookshelf.network.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -8,12 +8,26 @@
     android:background="@color/background"
     tools:context=".view.fragment.home.BookFragment">
 
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="홍길동 님의 서재"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/lato_regular"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tlLike"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabSelectedTextColor="@color/black"
+        android:background="@color/background"
+        app:layout_constraintTop_toBottomOf="@id/txtName"
+        app:tabSelectedTextColor="@color/main"
         app:tabTextAppearance="@style/tabLayoutStyle"
         app:tabTextColor="#999999">
     </com.google.android.material.tabs.TabLayout>
