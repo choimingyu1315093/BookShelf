@@ -173,4 +173,12 @@ class PreferenceUtil(context: Context) {
     fun setId(key: String, defValue: String){
         prefs.edit().putString(key, defValue).apply()
     }
+
+    //Email
+    fun getEmail(key: String, defValue: String): String {
+        return prefs.getString(key, defValue).toString()
+    }
+    fun setEmail(key: String, defValue: String){
+        prefs.edit().putString(key, defValue).apply()
+    }
 }

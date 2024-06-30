@@ -82,21 +82,21 @@ class AgreePageFragment : Fragment() {
         }
 
         ivCb1.setOnClickListener {
-            val link = "https://naver.com"
+            val link = "https://velog.io/@jongwoong0401/%EC%B1%85%EA%BD%82%EC%9D%B4-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%95%BD%EA%B4%80"
             val dialog = WebViewDialog(link)
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light)
             dialog.show(requireActivity().supportFragmentManager, "WebViewDialog")
         }
 
         ivCb2.setOnClickListener {
-            val link = "https://naver.com"
+            val link = "https://velog.io/@jongwoong0401/%EC%B1%85%EA%BD%82%EC%9D%B4-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8"
             val dialog = WebViewDialog(link)
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light)
             dialog.show(requireActivity().supportFragmentManager, "WebViewDialog")
         }
 
         ivCb3.setOnClickListener {
-            val link = "https://naver.com"
+            val link = "https://velog.io/@jongwoong0401/%EC%B1%85%EA%BD%82%EC%9D%B4-%EC%9C%84%EC%B9%98%EA%B8%B0%EB%B0%98%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%95%BD%EA%B4%80"
             val dialog = WebViewDialog(link)
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light)
             dialog.show(requireActivity().supportFragmentManager, "WebViewDialog")

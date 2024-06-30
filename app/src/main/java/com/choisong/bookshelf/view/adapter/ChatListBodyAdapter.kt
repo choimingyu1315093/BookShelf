@@ -75,6 +75,8 @@ class ChatListBodyAdapter(private val chatroomList: ArrayList<ChatListDataResult
                 var rcvdMinute = rcvdTime.split(":")[1].toInt()
                 var rcvdSecond = rcvdTime.split(":")[2].toInt()
 
+                Log.d("TAG", "bind: ")
+
                 tvTime.text =
                     if (rcvdYear == year) {
                         if (rcvdMonth == month) {
@@ -84,7 +86,7 @@ class ChatListBodyAdapter(private val chatroomList: ArrayList<ChatListDataResult
                                         if (second == rcvdSecond) {
                                             "방금"
                                         } else {
-                                            "${second - rcvdSecond}초 전"
+                                            "${rcvdSecond - second}초 전"
                                         }
                                     } else {
                                         "${minute - rcvdMinute}분 전"

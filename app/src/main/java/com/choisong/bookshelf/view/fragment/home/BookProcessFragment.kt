@@ -79,7 +79,7 @@ class BookProcessFragment(private val type: String) : Fragment(), WishHaveBookAd
                 }else if(type == "읽고 있는 책"){
                     tvEmpty.text = "읽고 있는 책이 없어요."
                 }else {
-                    tvEmpty.text = "읽은책이 없어요."
+                    tvEmpty.text = "읽은 책이 없어요."
                 }
             }
         }

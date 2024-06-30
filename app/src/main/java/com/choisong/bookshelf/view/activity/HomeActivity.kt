@@ -56,11 +56,18 @@ class HomeActivity : AppCompatActivity() {
                 val matcher = pattern.matcher(fragmentClass)
                 if (matcher.find()) {
                     val extractedText = matcher.group(1)
+                    Log.d("TAG", "onBackPressed: $extractedText")
                     if(extractedText == "ChatroomFragment"){
                         Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_chatroomFragment_to_chatFragment)
                     }else if(extractedText == "ChatFragment"){
                         Navigation.findNavController(binding.fragmentContainerView).navigate(R.id.action_chatFragment_to_homeFragment)
                     }else if(extractedText == "ProfileChangeFragment"){
+                        Navigation.findNavController(binding.fragmentContainerView).popBackStack()
+                    }else if(extractedText == "ChargeLogFragment"){
+                        Navigation.findNavController(binding.fragmentContainerView).popBackStack()
+                    }else if(extractedText == "PasswordChangeFragment"){
+                        Navigation.findNavController(binding.fragmentContainerView).popBackStack()
+                    }else if(extractedText == "SecessionFragment"){
                         Navigation.findNavController(binding.fragmentContainerView).popBackStack()
                     }else {
                         if(backKeyPressedTime + 3000 > System.currentTimeMillis()){

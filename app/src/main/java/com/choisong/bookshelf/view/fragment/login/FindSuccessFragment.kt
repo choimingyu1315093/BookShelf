@@ -2,10 +2,12 @@ package com.choisong.bookshelf.view.fragment.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.choisong.bookshelf.MyApplication
@@ -40,10 +42,11 @@ class FindSuccessFragment : Fragment() {
     }
 
     private fun init() = with(binding){
+        Log.d(TAG, "asdsad ${MyApplication.prefs.getId("id", "")}")
         if(type.type == "id"){
             txtInfo.text = "회원님의 아이디는\n${MyApplication.prefs.getId("id", "")}입니다."
         }else {
-            txtInfo.text = "test1234@naver.com으로\n임시 비밀번호를 전송하였습니다."
+            txtInfo.text = "${MyApplication.prefs.getEmail("email", "")}으로\n임시 비밀번호를 전송하였습니다."
             txtSubInfo.visibility = View.VISIBLE
             btnFindPw.visibility = View.GONE
         }

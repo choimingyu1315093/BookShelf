@@ -144,6 +144,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_detailFragment_to_profileFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -236,6 +241,15 @@
                             <option name="y" value="912" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_passwordChangeFragment_to_passwordChangeSuccessFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -247,6 +261,15 @@
                             <option name="x" value="-53" />
                             <option name="y" value="911" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_passwordChangeSuccessFragment_to_settingFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -288,6 +311,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_profileFragment_to_detailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_profileFragment_to_notificationFragment">
                               <value>
                                 <LayoutPositions />
@@ -303,6 +331,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="profileMemoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-261" />
+                            <option name="y" value="-112" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="secessionFragment">
                     <value>
                       <LayoutPositions>
@@ -311,6 +351,15 @@
                             <option name="x" value="-257" />
                             <option name="y" value="1200" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_secessionFragment_to_secessionSuccessFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -350,12 +399,27 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_settingFragment_self">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_settingFragment_to_chargeFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_settingFragment_to_chargeLogFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_settingFragment_to_passwordChangeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_settingFragment_to_secessionFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

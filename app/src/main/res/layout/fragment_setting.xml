@@ -31,14 +31,23 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="22dp"
+                android:src="@drawable/icon_charge5"
+                app:layout_constraintTop_toTopOf="@id/btnMoney"
+                app:layout_constraintBottom_toBottomOf="@id/btnMoney"
+                app:layout_constraintEnd_toStartOf="@id/btnMoney"
+                android:layout_marginRight="-30dp"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/bg_no_767676_30"
-                android:text="5,000"
-                android:drawableStart="@drawable/icon_money2"
-                android:paddingHorizontal="10dp"
+                tools:text="10권"
+                android:gravity="center"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

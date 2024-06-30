@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="666666" />
-                            <entry key="outputName" value="icon_user" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="iv_people" />
                           </map>
                         </option>
                       </PersistentState>

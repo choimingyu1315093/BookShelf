@@ -1,12 +1,17 @@
 package com.choisong.bookshelf.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.choisong.bookshelf.databinding.ItemMemoBinding
 import com.choisong.bookshelf.model.ProfileMemoDataResult
 
-class ProfileMemoAdapter(private val memoList: ArrayList<ProfileMemoDataResult>): RecyclerView.Adapter<ProfileMemoAdapter.ViewHolder>() {
+class ProfileMemoAdapter(private val memoList: ArrayList<ProfileMemoDataResult>, private val onClickListener: OnClickListener): RecyclerView.Adapter<ProfileMemoAdapter.ViewHolder>() {
+
+    interface OnClickListener {
+        fun goDetail(bookIsbn: String)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemMemoBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -14,6 +19,9 @@ class ProfileMemoAdapter(private val memoList: ArrayList<ProfileMemoDataResult>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(memoList[position])
+        holder.itemView.setOnClickListener {
+            onClickListener.goDetail(memoList[position].books.book_isbn)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_profileFragment_to_profileChangeFragment"
             app:destination="@id/profileChangeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -86,6 +89,9 @@
             android:name="bookDetailData"
             app:argType="com.choisong.bookshelf.model.BookDetailDataResult"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_detailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"

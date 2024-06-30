@@ -75,7 +75,7 @@ class ReviewAdapter(private val commentList: ArrayList<BookDetailComment>): Recy
                                     if (second == rcvdSecond) {
                                         "방금"
                                     } else {
-                                        "${second - rcvdSecond}초 전"
+                                        "${rcvdSecond - second}초 전"
                                     }
                                 } else {
                                     "${minute - rcvdMinute}분 전"

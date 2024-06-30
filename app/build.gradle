@@ -14,16 +14,17 @@ android {
 
     defaultConfig {
         applicationId "com.choisong.bookshelf"
-        minSdk 31
+        minSdk 26
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 8
+        versionName "8.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
+            debuggable = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -160,5 +161,11 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
 
+    //구글 결제서비스 5버전
+    implementation("com.android.billingclient:billing-ktx:5.0.0")
+    runtimeOnly 'org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5'
+    implementation 'com.google.guava:guava:31.1-android'
+
+    //권한
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 }

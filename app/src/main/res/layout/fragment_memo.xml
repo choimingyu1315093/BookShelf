@@ -70,9 +70,11 @@
         app:layout_constraintTop_toBottomOf="@id/btnWrite" />
     <TextView
         android:id="@+id/tvEmpty"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_marginTop="77dp"
         android:fontFamily="@font/lato_regular"
         android:text="메모를 작성해 보세요."

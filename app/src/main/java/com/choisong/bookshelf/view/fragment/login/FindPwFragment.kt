@@ -96,6 +96,7 @@ class FindPwFragment : Fragment() {
             if(it){
                 val action = FindPwFragmentDirections.actionFindPwFragmentToFindSuccessFragment("password")
                 Navigation.findNavController(binding.root).navigate(action)
+                MyApplication.prefs.setEmail("email", etEmail.text.toString().trim())
             }else {
                 Toast.makeText(requireContext(), "입력하신 정보를 다시 한번 확인해주세요.", Toast.LENGTH_SHORT).show()
             }

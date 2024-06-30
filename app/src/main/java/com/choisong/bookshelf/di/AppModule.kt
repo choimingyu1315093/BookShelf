@@ -541,4 +541,15 @@ object AppModule {
             .build()
             .create(GetBookMemoApi::class.java)
     }
+
+    //티켓구매
+    @Singleton
+    @Provides
+    fun providePatchBuyTicket(): PatchBuyTicketsApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PatchBuyTicketsApi::class.java)
+    }
 }

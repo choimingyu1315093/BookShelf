@@ -55,15 +55,6 @@ class DetailFragment : Fragment() {
     private val generalBook: DetailFragmentArgs by navArgs()
     private val bookDetailData: DetailFragmentArgs by navArgs()
 
-    private lateinit var addHaveBookModel: AddHaveBookModel
-
-    lateinit var reviewAdapter: ReviewAdapter
-
-    private var haveBestseller = false
-    private var wishBestseller = false
-    private lateinit var haveBookIdx: String
-    private lateinit var wishBookIdx: String
-
     private var bookIsbn = ""
     private var myBookIdx = 0
     private var readType = "none"
@@ -109,8 +100,11 @@ class DetailFragment : Fragment() {
         }else if(detailType.detailType == "general"){
             bookIsbn = generalBook.generalBook!!.book_isbn
             detailViewModel.getBookDetail(accessToken, bookIsbn)
-        }else {
+        }else if(detailType.detailType == "bookFragment"){
             bookIsbn = bookDetailData.bookDetailData!!.book_isbn
+            detailViewModel.getBookDetail(accessToken, bookIsbn)
+        }else {
+            bookIsbn = detailType.detailType
             detailViewModel.getBookDetail(accessToken, bookIsbn)
         }
 

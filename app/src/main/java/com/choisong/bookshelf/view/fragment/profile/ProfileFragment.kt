@@ -17,13 +17,15 @@ import com.choisong.bookshelf.view.activity.HomeActivity
 import com.choisong.bookshelf.view.adapter.VPAdapter3
 import com.choisong.bookshelf.view.adapter.VPAdapter4
 import com.choisong.bookshelf.view.dialog.UserDeleteDialog
+import com.choisong.bookshelf.view.fragment.home.BookFragmentDirections
+import com.choisong.bookshelf.view.fragment.home.HomeFragmentDirections
 import com.choisong.bookshelf.viewmodel.NotificationViewModel
 import com.choisong.bookshelf.viewmodel.ProfileViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), ProfileMemoFragment.OnDetailListener {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val profileViewModel: ProfileViewModel by viewModels()
@@ -62,7 +64,7 @@ class ProfileFragment : Fragment() {
         profileViewModel.myProfile(accessToken)
         notificationViewModel.alarmCount(accessToken)
 
-        vpAdapter = VPAdapter4(requireParentFragment())
+        vpAdapter = VPAdapter4(requireParentFragment(), this@ProfileFragment)
         vpType.adapter = vpAdapter
         TabLayoutMediator(tlType, vpType){tab, position ->
             when(position){
@@ -111,6 +113,11 @@ class ProfileFragment : Fragment() {
                 tvNotifyCount.text = it.toString()
             }
         }
+    }
+
+    override fun goDetail(bookIsbn: String) {
+        val action = ProfileFragmentDirections.actionProfileFragmentToDetailFragment(null, null, null, bookIsbn, null)
+        Navigation.findNavController(binding.root).navigate(action)
     }
 
     override fun onDestroyView() {
