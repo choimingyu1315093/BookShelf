@@ -117,6 +117,9 @@ class LoginViewModel @Inject constructor(
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "signIn: Success $result")
+                        MyApplication.prefs.setAutoLogin("autoLogin", true)
+                        MyApplication.prefs.setLoginId("loginId", signInModel.user_id!!)
+                        MyApplication.prefs.setLoginPw("loginPw", signInModel.user_password!!)
                         MyApplication.prefs.setAccessToken("accessToken", result!!.data.access_token)
                         MyApplication.prefs.setUserIdx("userIdx", result.data.user_idx)
                         _signInResult.postValue(result.result)
@@ -135,6 +138,7 @@ class LoginViewModel @Inject constructor(
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "snsSignIn: Success $result")
+                        MyApplication.prefs.setAutoLogin("autoLogin", true)
                         MyApplication.prefs.setAccessToken("accessToken", result!!.data.access_token)
                         MyApplication.prefs.setUserIdx("userIdx", result.data.user_idx)
                         _snsSignInResult.postValue(result.result)
@@ -187,7 +191,8 @@ class LoginViewModel @Inject constructor(
                 if(response.isSuccessful){
                     response.body().let { result ->
                         Log.d("TAG", "snsSignUp: Success $result")
-                        _snsSignUpResult.postValue(result!!.result)
+                        MyApplication.prefs.setAccessToken("accessToken", result!!.data.access_token)
+                        _snsSignUpResult.postValue(result.result)
                     }
                 }else {
                     response.body().let { result ->

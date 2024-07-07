@@ -1,5 +1,6 @@
 package com.choisong.bookshelf.view.fragment.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.choisong.bookshelf.R
 import com.choisong.bookshelf.databinding.FragmentSettingBinding
 import com.choisong.bookshelf.model.UserSettingModel
 import com.choisong.bookshelf.view.activity.HomeActivity
+import com.choisong.bookshelf.view.activity.LoginActivity
 import com.choisong.bookshelf.viewmodel.SettingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,7 @@ class SettingFragment : Fragment() {
     }
 
     private lateinit var accessToken: String
+    private var ticket = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +97,8 @@ class SettingFragment : Fragment() {
         }
 
         cl3.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_settingFragment_to_chargeFragment)
+            val action = SettingFragmentDirections.actionSettingFragmentToChargeFragment(ticket)
+            Navigation.findNavController(binding.root).navigate(action)
             (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
         }
 
@@ -112,12 +116,21 @@ class SettingFragment : Fragment() {
             Navigation.findNavController(binding.root).navigate(R.id.action_settingFragment_to_secessionFragment)
             (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
         }
+
+        cl7.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            MyApplication.prefs.setAutoLogin("autoLogin", false)
+            MyApplication.prefs.setLoginId("loginId", "")
+            MyApplication.prefs.setLoginPw("loginPw", "")
+        }
     }
 
     private fun observeViewModel() = with(binding){
         settingViewModel.userSettingResult.observe(viewLifecycleOwner){
+            ticket = it.ticket_count
             tvWelcome.text = "${it.user_name} 님, 환영합니다."
-            btnMoney.text = "${it.ticket_count}권"
+            btnMoney.text = "${it.ticket_count}장"
             swChat.isChecked = it.setting_chat_alarm == 1
             swMarketing.isChecked = it.setting_marketing_alarm == 1
             swNear.isChecked = it.setting_wish_book_alarm == 1

@@ -110,6 +110,9 @@
         <action
             android:id="@+id/action_chargeFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <argument
+            android:name="ticket"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/chargeLogFragment"

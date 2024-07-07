@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.android.billingclient.api.*
 import com.choisong.bookshelf.MyApplication
 import com.choisong.bookshelf.R
@@ -18,6 +19,7 @@ import com.choisong.bookshelf.model.PaymentItem
 import com.choisong.bookshelf.model.PaymentModel
 import com.choisong.bookshelf.model.TicketBuyModel
 import com.choisong.bookshelf.view.activity.HomeActivity
+import com.choisong.bookshelf.view.fragment.detail.DetailFragmentArgs
 import com.choisong.bookshelf.viewmodel.ChargeViewModel
 import com.google.common.collect.ImmutableList
 import com.google.gson.Gson
@@ -35,6 +37,8 @@ class ChargeFragment : Fragment(), PurchasesUpdatedListener {
     companion object {
         const val TAG = "ChargeFragment"
     }
+
+    private val ticket: ChargeFragmentArgs by navArgs()
 
     lateinit var accessToken: String
 
@@ -59,7 +63,6 @@ class ChargeFragment : Fragment(), PurchasesUpdatedListener {
 
         init()
         bindViews()
-        observeViewModel()
     }
 
     private fun init() = with(binding){
@@ -137,6 +140,8 @@ class ChargeFragment : Fragment(), PurchasesUpdatedListener {
             }
         }
 
+        tvTicket.text = "낙엽 ${ticket.ticket}장"
+
         btnPurchase.setOnClickListener { purchaseItem(1) }
         btnPurchase2.setOnClickListener { purchaseItem(3) }
         btnPurchase3.setOnClickListener { purchaseItem(0) }
@@ -147,10 +152,6 @@ class ChargeFragment : Fragment(), PurchasesUpdatedListener {
         ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
-    }
-
-    private fun observeViewModel() = with(binding){
-
     }
 
     private fun purchaseItem(itemIndex: Int) {

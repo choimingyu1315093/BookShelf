@@ -7,16 +7,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
 import com.choisong.bookshelf.MyApplication
 import com.choisong.bookshelf.databinding.ActivitySplashBinding
+import com.choisong.bookshelf.model.SignInModel
+import com.choisong.bookshelf.model.SnsSignInModel
 import com.choisong.bookshelf.view.fragment.login.LoginFragment
+import com.choisong.bookshelf.viewmodel.LoginViewModel
 import com.google.firebase.messaging.FirebaseMessaging
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
+    private val loginViewModel: LoginViewModel by viewModels()
 
     companion object {
         const val TAG = "SplashActivity"
@@ -29,6 +37,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         requestPermission()
+        observeViewModel()
     }
 
     private fun requestPermission(){
@@ -50,6 +59,24 @@ class SplashActivity : AppCompatActivity() {
                 override fun onPermissionGranted() {
                     binding.btnStart.setOnClickListener {
                         getFcmToken()
+//                        if(MyApplication.prefs.getAutoLogin("autoLogin", false)){
+//                            if(MyApplication.prefs.getLoginType("loginType", "general") == "general"){
+//                                val signInModel = SignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "general", MyApplication.prefs.getLoginId("loginId", ""), MyApplication.prefs.getLoginPw("loginPw", ""))
+//                                loginViewModel.signIn(signInModel)
+//                            }else if(MyApplication.prefs.getLoginType("loginType", "general") == "kakao"){
+//                                val snsSignInModel = SnsSignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "kakao", MyApplication.prefs.getKakaoToken("kakaoToken", ""))
+//                                loginViewModel.snsSignIn(snsSignInModel)
+//                            }else if(MyApplication.prefs.getLoginType("loginType", "general") == "naver"){
+//                                val snsSignInModel = SnsSignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "naver", MyApplication.prefs.getNaverToken("naverToken", ""))
+//                                loginViewModel.snsSignIn(snsSignInModel)
+//                            }else {
+//                                val snsSignInModel = SnsSignInModel(MyApplication.prefs.getFcmToken("fcmToken", ""), "google", MyApplication.prefs.getGoogleToken("googleToken", ""))
+//                                loginViewModel.snsSignIn(snsSignInModel)
+//                            }
+//                        }else {
+//                            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+//                            startActivity(intent)
+//                        }
                         val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                         startActivity(intent)
                     }
@@ -63,6 +90,33 @@ class SplashActivity : AppCompatActivity() {
             .setDeniedMessage("필요한 권한을 허용해주세요.")
             .setPermissions(*permissions.toTypedArray())
             .check()
+    }
+
+    private fun observeViewModel() = with(binding){
+//        loginViewModel.signInResult.observe(this@SplashActivity){
+//            if(it){
+//                MyApplication.prefs.setLoginType("loginType", "general")
+//                loginViewModel.myProfile(MyApplication.prefs.getAccessToken("accessToken", ""))
+//            }else {
+//                Toast.makeText(this@SplashActivity, "입력하신 정보와 일치하는 회원이 없습니다.", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//        loginViewModel.snsSignInResult.observe(this@SplashActivity){
+//            if(it){
+//                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+//                startActivity(intent)
+//            }else {
+//                Toast.makeText(this@SplashActivity, "입력하신 정보와 일치하는 회원이 없습니다.", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//        loginViewModel.myProfileResult.observe(this@SplashActivity){
+//            if(it){
+//                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
     }
 
     private fun getFcmToken(){

@@ -6,11 +6,35 @@ import android.content.SharedPreferences
 class PreferenceUtil(context: Context) {
     private val prefs: SharedPreferences = context.getSharedPreferences("prefs_name", Context.MODE_PRIVATE)
 
+    //AutoLogin
+    fun getAutoLogin(key: String, defValue: Boolean): Boolean {
+        return prefs.getBoolean(key, defValue)
+    }
+    fun setAutoLogin(key: String, defValue: Boolean){
+        prefs.edit().putBoolean(key, defValue).apply()
+    }
+
     //loginType
     fun getLoginType(key: String, defValue: String): String {
         return prefs.getString(key, defValue).toString()
     }
     fun setLoginType(key: String, defValue: String){
+        prefs.edit().putString(key, defValue).apply()
+    }
+
+    //loginId
+    fun getLoginId(key: String, defValue: String): String {
+        return prefs.getString(key, defValue).toString()
+    }
+    fun setLoginId(key: String, defValue: String){
+        prefs.edit().putString(key, defValue).apply()
+    }
+
+    //loginPassword
+    fun getLoginPw(key: String, defValue: String): String {
+        return prefs.getString(key, defValue).toString()
+    }
+    fun setLoginPw(key: String, defValue: String){
         prefs.edit().putString(key, defValue).apply()
     }
 

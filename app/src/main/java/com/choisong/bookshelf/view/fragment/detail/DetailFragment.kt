@@ -90,6 +90,7 @@ class DetailFragment : Fragment() {
     private fun init() = with(binding){
         (requireActivity() as HomeActivity).binding.bottomNavigationView.visibility = View.GONE
         accessToken = MyApplication.prefs.getAccessToken("accessToken", "")
+        Log.d(TAG, "init: accessToken $accessToken")
 
         if(detailType.detailType == "bestseller"){
             bookIsbn = bestseller.bestseller!!.isbn13!!
